@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-21T15:45:00+02:00",
+  "generated_at": "2026-07-21T15:54:17+02:00",
   "schedule_date": "2026-07-21",
   "account": "hristos.lcdfix@gmail.com",
   "auth": {
@@ -72,93 +72,7 @@
         "source": "pipedrive"
       }
     ],
-    "tomorrow": [
-      {
-        "title": "[Kairos] NAYAX telefonszám változás (Dóri)",
-        "start": "2026-07-22T10:20:00+02:00",
-        "end": "2026-07-22T10:50:00+02:00",
-        "location": "Online",
-        "type": "pipedrive",
-        "event_id": "0120ail4e5d33fbo1a4ebtpqdo",
-        "calendar_id": "73661aa7f8ac58bd811558f8cbed7d3b30dfc104a1c5d1fd3a884220d742e26d@group.calendar.google.com",
-        "task_id": "Ym1zVmptNkdnbFJuVUF2ZA",
-        "pipedrive_activity_id": 2640,
-        "stale_suspect": true,
-        "editable": true,
-        "google_url": "https://www.google.com/calendar/event?eid=MDEyMGFpbDRlNWQzM2ZibzFhNGVidHBxZG8gNzM2NjFhYTdmOGFjNThiZDgxMTU1OGY4Y2JlZDdkM2IzMGRmYzEwNGExYzVkMWZkM2E4ODQyMjBkNzQyZTI2ZEBn",
-        "pipedrive_url": "https://gluxshop.pipedrive.com/activity/2640",
-        "url": "https://gluxshop.pipedrive.com/activity/2640",
-        "source": "pipedrive"
-      },
-      {
-        "title": "📋 Shopify B2B ellenőrzés (Dóri)",
-        "start": "2026-07-22T10:30:00+02:00",
-        "end": "2026-07-22T11:00:00+02:00",
-        "location": "Online",
-        "type": "pipedrive",
-        "event_id": "r7rmj5hgrkaumf1gj5lepj2plc",
-        "calendar_id": "73661aa7f8ac58bd811558f8cbed7d3b30dfc104a1c5d1fd3a884220d742e26d@group.calendar.google.com",
-        "task_id": "b0t2U3BBcG5INS1nRVZIUg",
-        "pipedrive_activity_id": 3510,
-        "stale_suspect": "maybe",
-        "editable": true,
-        "google_url": "https://www.google.com/calendar/event?eid=cjdybWo1aGdya2F1bWYxZ2o1bGVwajJwbGMgNzM2NjFhYTdmOGFjNThiZDgxMTU1OGY4Y2JlZDdkM2IzMGRmYzEwNGExYzVkMWZkM2E4ODQyMjBkNzQyZTI2ZEBn",
-        "pipedrive_url": "https://gluxshop.pipedrive.com/activity/3510",
-        "url": "https://gluxshop.pipedrive.com/activity/3510",
-        "source": "pipedrive"
-      },
-      {
-        "title": "📋 Duna pláza automata átvitel (Dóri)",
-        "start": "2026-07-22T11:00:00+02:00",
-        "end": "2026-07-22T11:30:00+02:00",
-        "location": "Online",
-        "type": "pipedrive",
-        "event_id": "js8h7r4tkva2d82rhqah2ogdr8",
-        "calendar_id": "73661aa7f8ac58bd811558f8cbed7d3b30dfc104a1c5d1fd3a884220d742e26d@group.calendar.google.com",
-        "task_id": "YVFRTjFIVTZOdVlBYjVkaQ",
-        "pipedrive_activity_id": 3507,
-        "stale_suspect": "maybe",
-        "editable": true,
-        "google_url": "https://www.google.com/calendar/event?eid=anM4aDdyNHRrdmEyZDgycmhxYWgyb2dkcjggNzM2NjFhYTdmOGFjNThiZDgxMTU1OGY4Y2JlZDdkM2IzMGRmYzEwNGExYzVkMWZkM2E4ODQyMjBkNzQyZTI2ZEBn",
-        "pipedrive_url": "https://gluxshop.pipedrive.com/activity/3507",
-        "url": "https://gluxshop.pipedrive.com/activity/3507",
-        "source": "pipedrive"
-      },
-      {
-        "title": "📋 B2B kontakt feltöltés (Dóri)",
-        "start": "2026-07-22T13:30:00+02:00",
-        "end": "2026-07-22T14:00:00+02:00",
-        "location": "Online",
-        "type": "pipedrive",
-        "event_id": "bl5sfcsoouht7gt9lodjj7e29o",
-        "calendar_id": "73661aa7f8ac58bd811558f8cbed7d3b30dfc104a1c5d1fd3a884220d742e26d@group.calendar.google.com",
-        "task_id": "WGxsSWR1dC1xdGY4encyaQ",
-        "pipedrive_activity_id": 2593,
-        "stale_suspect": true,
-        "editable": true,
-        "google_url": "https://www.google.com/calendar/event?eid=Ymw1c2Zjc29vdWh0N2d0OWxvZGpqN2UyOW8gNzM2NjFhYTdmOGFjNThiZDgxMTU1OGY4Y2JlZDdkM2IzMGRmYzEwNGExYzVkMWZkM2E4ODQyMjBkNzQyZTI2ZEBn",
-        "pipedrive_url": "https://gluxshop.pipedrive.com/activity/2593",
-        "url": "https://gluxshop.pipedrive.com/activity/2593",
-        "source": "pipedrive"
-      },
-      {
-        "title": "📋 NAV ügyfélkapu — Hívás (Dóri)",
-        "start": "2026-07-22T14:00:00+02:00",
-        "end": "2026-07-22T14:30:00+02:00",
-        "location": "Telefon",
-        "type": "pipedrive",
-        "event_id": "b2t8fuvesi3fsm218vn158vufo",
-        "calendar_id": "73661aa7f8ac58bd811558f8cbed7d3b30dfc104a1c5d1fd3a884220d742e26d@group.calendar.google.com",
-        "task_id": "NUprSDhXYUtIZG9RbWVSbg",
-        "pipedrive_activity_id": 1546,
-        "stale_suspect": true,
-        "editable": true,
-        "google_url": "https://www.google.com/calendar/event?eid=YjJ0OGZ1dmVzaTNmc20yMTh2bjE1OHZ1Zm8gNzM2NjFhYTdmOGFjNThiZDgxMTU1OGY4Y2JlZDdkM2IzMGRmYzEwNGExYzVkMWZkM2E4ODQyMjBkNzQyZTI2ZEBn",
-        "pipedrive_url": "https://gluxshop.pipedrive.com/activity/1546",
-        "url": "https://gluxshop.pipedrive.com/activity/1546",
-        "source": "pipedrive"
-      }
-    ],
+    "tomorrow": [],
     "thursday": [
       {
         "title": "[Kairos] Grenton hívni — jön-e este villanyszerelő?",
@@ -608,84 +522,6 @@
         "source": "pipedrive",
         "event_id": "cvtphmsrkql15p2e8drtjlti4k",
         "calendar_id": "73661aa7f8ac58bd811558f8cbed7d3b30dfc104a1c5d1fd3a884220d742e26d@group.calendar.google.com"
-      },
-      {
-        "title": "[pipedrive] Shopify B2B ellenőrzés és indítás (Dóri)",
-        "priority": "medium",
-        "due": null,
-        "task_id": "b0t2U3BBcG5INS1nRVZIUg",
-        "task_list_id": "@default",
-        "editable": true,
-        "google_url": "https://tasks.google.com/task/b0t2U3BBcG5INS1nRVZIUg",
-        "pipedrive_activity_id": 3510,
-        "pipedrive_url": "https://gluxshop.pipedrive.com/activity/3510",
-        "url": "https://gluxshop.pipedrive.com/activity/3510",
-        "source": "pipedrive",
-        "event_id": "r7rmj5hgrkaumf1gj5lepj2plc",
-        "calendar_id": "73661aa7f8ac58bd811558f8cbed7d3b30dfc104a1c5d1fd3a884220d742e26d@group.calendar.google.com"
-      },
-      {
-        "title": "[pipedrive] NAYAX telefonszám változás (Dóri)",
-        "priority": "low",
-        "due": null,
-        "task_id": "Ym1zVmptNkdnbFJuVUF2ZA",
-        "task_list_id": "@default",
-        "editable": true,
-        "google_url": "https://tasks.google.com/task/Ym1zVmptNkdnbFJuVUF2ZA",
-        "pipedrive_activity_id": 2640,
-        "pipedrive_url": "https://gluxshop.pipedrive.com/activity/2640",
-        "url": "https://gluxshop.pipedrive.com/activity/2640",
-        "source": "pipedrive",
-        "event_id": "0120ail4e5d33fbo1a4ebtpqdo",
-        "calendar_id": "73661aa7f8ac58bd811558f8cbed7d3b30dfc104a1c5d1fd3a884220d742e26d@group.calendar.google.com",
-        "stale_suspect": true
-      },
-      {
-        "title": "[pipedrive] Kontakt feltöltése B2B partnerkereséshez (Dóri)",
-        "priority": "low",
-        "due": null,
-        "task_id": "WGxsSWR1dC1xdGY4encyaQ",
-        "task_list_id": "@default",
-        "editable": true,
-        "google_url": "https://tasks.google.com/task/WGxsSWR1dC1xdGY4encyaQ",
-        "pipedrive_activity_id": 2593,
-        "pipedrive_url": "https://gluxshop.pipedrive.com/activity/2593",
-        "url": "https://gluxshop.pipedrive.com/activity/2593",
-        "source": "pipedrive",
-        "event_id": "bl5sfcsoouht7gt9lodjj7e29o",
-        "calendar_id": "73661aa7f8ac58bd811558f8cbed7d3b30dfc104a1c5d1fd3a884220d742e26d@group.calendar.google.com",
-        "stale_suspect": true
-      },
-      {
-        "title": "[pipedrive] NAV automata ügyfélkapu — Hívás (Dóri)",
-        "priority": "low",
-        "due": null,
-        "task_id": "NUprSDhXYUtIZG9RbWVSbg",
-        "task_list_id": "@default",
-        "editable": true,
-        "google_url": "https://tasks.google.com/task/NUprSDhXYUtIZG9RbWVSbg",
-        "pipedrive_activity_id": 1546,
-        "pipedrive_url": "https://gluxshop.pipedrive.com/activity/1546",
-        "url": "https://gluxshop.pipedrive.com/activity/1546",
-        "source": "pipedrive",
-        "event_id": "b2t8fuvesi3fsm218vn158vufo",
-        "calendar_id": "73661aa7f8ac58bd811558f8cbed7d3b30dfc104a1c5d1fd3a884220d742e26d@group.calendar.google.com",
-        "stale_suspect": true
-      },
-      {
-        "title": "[pipedrive] duna pláza automata átvitel (Dóri)",
-        "priority": "low",
-        "due": null,
-        "task_id": "YVFRTjFIVTZOdVlBYjVkaQ",
-        "task_list_id": "@default",
-        "editable": true,
-        "google_url": "https://tasks.google.com/task/YVFRTjFIVTZOdVlBYjVkaQ",
-        "pipedrive_activity_id": 3507,
-        "pipedrive_url": "https://gluxshop.pipedrive.com/activity/3507",
-        "url": "https://gluxshop.pipedrive.com/activity/3507",
-        "source": "pipedrive",
-        "event_id": "js8h7r4tkva2d82rhqah2ogdr8",
-        "calendar_id": "73661aa7f8ac58bd811558f8cbed7d3b30dfc104a1c5d1fd3a884220d742e26d@group.calendar.google.com"
       }
     ],
     "gluxshop": [
@@ -839,5 +675,22 @@
       "Partner Tele newsletter",
       "Dockyard hírlevél"
     ]
+  },
+  "notes": {
+    "pipedrive_stale_cleanup": {
+      "at": "2026-07-21T15:54:17+02:00",
+      "completed_activity_ids": [
+        1546,
+        2593,
+        2640,
+        3507,
+        3510
+      ],
+      "action": "Marked done in Pipedrive + completed Google Tasks; Kairos tomorrow blocks already deleted",
+      "kept_open": [
+        4904,
+        6230
+      ]
+    }
   }
 }
