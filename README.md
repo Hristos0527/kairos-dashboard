@@ -1,51 +1,63 @@
 # Kairos Dashboard — GitHub Pages
 
-Statikus dashboard a naptár + teendők + javasolt időblokkok megjelenítéséhez.
+Statikus dashboard + **live szerkesztés** (Google OAuth → Tasks kipipálás, naptár mozgatás).
 
-## Publikus repo
+**Pages URL:** https://hristos0527.github.io/kairos-dashboard/
 
-Külön repo (csak dashboard fájlok): `/Users/hristos/Projects/kairos-dashboard`
+## Mit tudsz csinálni
 
-**Várható Pages URL** (push + Pages enable után):
+1. **Google belépés** (header gomb) — personal fiók: `hristos.lcdfix@gmail.com`
+2. **Személyes taskek** — checkbox → Google Tasks `completed`
+3. **Naptár** — eseményenként **−15p / +15p**, vagy időválasztó + **Áthelyez** → Calendar `events.patch`
+4. **Gluxshop taskek** — más fiók (`info@gluxshop.eu`) → csak **Google** link (v1)
 
-`https://hristos0527.github.io/kairos-dashboard/`
+## Egyszeri OAuth setup (kötelező az első belépéshez)
 
-> 2026-07-21: a gépről `github.com` / `api.github.com` Connection refused + `gh` token invalid.
-> Push előtt: hálózati unblock (firewall/Little Snitch) + `gh auth login -h github.com`.
+A `config.js`-ben lévő Client ID Web kliens. A Google Cloud Console-ban add hozzá:
 
-### Push parancsok (ha auth + network OK)
+**APIs & Services → Credentials → OAuth 2.0 Client IDs**  
+(projekt, ahol a client ID prefix: `889345739957-…`)
 
-```bash
-cd /Users/hristos/Projects/kairos-dashboard
-# sync latest from private workspace
-cp /Users/hristos/Projects/hristos-private/kairos/dashboard/{index.html,style.css,app.js} .
-cp /Users/hristos/Projects/hristos-private/kairos/dashboard/data/latest.json data/
-gh repo create kairos-dashboard --public --source=. --remote=origin --push
-gh api -X POST "repos/Hristos0527/kairos-dashboard/pages" \
-  -f build_type=workflow \
-  -F 'source[branch]=main' -F 'source[path]=/' 2>/dev/null || \
-gh api -X PUT "repos/Hristos0527/kairos-dashboard/pages" \
-  -F 'source[branch]=main' -F 'source[path]=/'
-```
+**Authorized JavaScript origins:**
 
-Alternatív Pages UI: Settings → Pages → Deploy from branch → `main` / `/ (root)`.
+- `https://hristos0527.github.io`
+- `http://localhost:8080` (helyi teszt)
 
-## Fájlok (publikus)
+**APIs engedélyezve** legyen:
 
-- `index.html` — főoldal
-- `style.css`, `app.js` — megjelenés és adatbetöltés
-- `data/latest.json` — utolsó sync adat (agent generálja)
+- Google Tasks API
+- Google Calendar API
 
-**Ne pusholj:** secrets, MCP token, teljes privát emailek.
+OAuth consent screen: tesztelőként add hozzá a personal Gmail címet, ha az app „Testing” módban van.
+
+Saját Client ID: írd a `config.js` → `clientId` mezőbe, vagy `?client_id=....apps.googleusercontent.com`.
+
+> A Client ID **nem secret**. Ne commitolj `client_secret`-et.
+
+## Fájlok
+
+| Fájl | Szerep |
+|------|--------|
+| `index.html` / `style.css` / `app.js` | UI + API hívások |
+| `config.js` | Client ID, calendar ID, scope |
+| `data/latest.json` | Snapshot (`event_id`, `task_id` mezőkkel) |
+
+Forrás sync: `/Users/hristos/Projects/hristos-private/kairos/dashboard/`
 
 ## Helyi előnézet
 
 ```bash
-cd kairos/dashboard
+cd /Users/hristos/Projects/kairos-dashboard
 python3 -m http.server 8080
-# böngésző: http://localhost:8080
+# http://localhost:8080
 ```
 
-## Frissítés
+## Frissítés / push
 
-Cursor chatben: **kairos sync** → másold a `data/latest.json`-t a publikus repóba → push.
+```bash
+cd /Users/hristos/Projects/kairos-dashboard
+# sync from private if needed, then:
+git add -A && git commit -m "…" && git push
+```
+
+Cursor: **kairos sync** → friss `data/latest.json` (ID-kkal) → push a publikus repóba.

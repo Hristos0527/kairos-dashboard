@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Kairos — ma</title>
   <link rel="stylesheet" href="style.css" />
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
 </head>
 <body>
   <header class="header">
@@ -14,10 +15,20 @@
     </div>
     <div class="meta">
       <span id="updated">Betöltés…</span>
+      <span id="auth-status" class="auth-status">Google: …</span>
+      <button type="button" class="btn" id="auth-btn">Google belépés</button>
       <a class="btn" href="https://calendar.google.com" target="_blank" rel="noopener">Naptár</a>
       <a class="btn" href="https://tasks.google.com" target="_blank" rel="noopener">Tasks</a>
     </div>
   </header>
+
+  <div id="auth-banner" class="banner">
+    <strong>Interaktív mód:</strong> lépj be Google-lel (personal: hristos.lcdfix@gmail.com),
+    utána kipipálhatod a személyes taskeket, és ±15p / időválasztóval mozgathatod a naptáreseményeket.
+    Első belépéshez a Client ID-nél legyen origin:
+    <code>https://hristos0527.github.io</code>
+    — részletek: README.
+  </div>
 
   <main class="grid">
     <section class="card span-2">
@@ -41,20 +52,24 @@
     </section>
 
     <section class="card">
-      <h2>Személyes teendők</h2>
+      <h2>Személyes teendők <span class="hint">kipipálható</span></h2>
       <ul class="list tasks" id="tasks-personal"></ul>
     </section>
 
     <section class="card">
-      <h2>Gluxshop teendők</h2>
+      <h2>Gluxshop teendők <span class="hint">csak Google link</span></h2>
       <ul class="list tasks" id="tasks-gluxshop"></ul>
     </section>
   </main>
 
   <footer class="footer">
-    Adat: <code>data/latest.json</code> — frissítés: „kairos sync” a Cursor chatben
+    Adat: <code>data/latest.json</code> — frissítés: „kairos sync” a Cursor chatben.
+    Live edit: Google Tasks + Calendar API (OAuth).
   </footer>
 
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <script src="config.js"></script>
   <script src="app.js"></script>
 </body>
 </html>
