@@ -454,13 +454,31 @@
     ]
   },
   "profit": {
-    "status": "error",
+    "status": "ok",
     "currency": "HUF",
     "as_of": "2026-07-21",
     "repairdesk": {
-      "status": "error",
-      "message": "RepairDesk API 401: Unauthorized",
-      "hint": "RepairDesk → Store Settings → API key: másold be a repairdesk_api secretbe. Ha 401: új kulcs generálás szükséges."
+      "status": "ok",
+      "basis": "cash",
+      "note": "Lista nézet: befizetés összeg + számla dátum (payment_date nélkül).",
+      "locations": [
+        "LCDFIX Allee",
+        "LCDFIX Etele",
+        "LCDFIX Duna"
+      ],
+      "today": {
+        "total": 1068690.0,
+        "by_store": {
+          "Allee": 1068690.0
+        }
+      },
+      "month_to_date": {
+        "total": 21867110.04,
+        "by_store": {
+          "Allee": 21867110.04
+        }
+      },
+      "invoice_count": 865
     }
   }
 }

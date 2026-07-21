@@ -61,7 +61,7 @@ git add data/latest.json && git commit -m "profit sync" && git push
 
 Secrets (team env): `repairdesk_api` (API kulcs), opcionálisan `repairdesk-login` / `repairdesk-password`.
 
-Ha **401 Unauthorized**: RepairDesk → Store Settings → API key → új kulcs → `repairdesk_api` secret frissítés.
+Ha **401**: auth legyen `Authorization: Bearer <key>` (ne query `api_key`).
 
 ## Helyi előnézet
 

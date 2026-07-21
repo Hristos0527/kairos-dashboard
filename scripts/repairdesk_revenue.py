@@ -36,13 +36,13 @@ def _request(path: str, params: dict[str, Any] | None = None) -> dict[str, Any]:
     if not key:
         raise RuntimeError("Missing repairdesk_api secret")
 
-    q = dict(params or {})
-    q["api_key"] = key
-    url = f"{BASE_URL}{path}?{urllib.parse.urlencode(q)}"
+    q = urllib.parse.urlencode(params or {})
+    url = f"{BASE_URL}{path}" + (f"?{q}" if q else "")
     req = urllib.request.Request(
         url,
         headers={
             "Accept": "application/json",
+            "Authorization": f"Bearer {key}",
             "User-Agent": "Mozilla/5.0 (compatible; KairosProfit/1.0)",
         },
     )
@@ -121,22 +121,29 @@ def sum_payments_in_range(
     total = 0.0
 
     for row in invoices:
-        summary = row.get("summary") or row
-        store = normalize_store(summary.get("store_name", ""), aliases)
-        payments = row.get("payments") or []
+        summary = row.get("summary") if isinstance(row.get("summary"), dict) else row
+        store_info = summary.get("store_info") or {}
+        store = normalize_store(
+            store_info.get("name") or summary.get("store_name", ""),
+            aliases,
+        )
+        payments = row.get("payments") or summary.get("payments") or []
         if payments:
             for payment in payments:
                 ts = int(payment.get("payment_date") or payment.get("created_on") or 0)
                 if ts < start_ts or ts > end_ts:
                     continue
-                amount = parse_money(payment.get("amount"))
+                amount = parse_money(payment.get("amount") or payment.get("symbol_amount"))
                 total += amount
                 by_store[store] = by_store.get(store, 0.0) + amount
         else:
-            # Fallback: paid invoice created in range
             created = int(summary.get("created_date") or 0)
             if start_ts <= created <= end_ts:
-                amount = parse_money(summary.get("amount_paid") or summary.get("total"))
+                amount = parse_money(
+                    summary.get("amount_paid")
+                    or summary.get("total_without_symbol")
+                    or summary.get("total")
+                )
                 total += amount
                 by_store[store] = by_store.get(store, 0.0) + amount
 
@@ -145,7 +152,7 @@ def sum_payments_in_range(
 
 def fetch_paid_invoices(from_ts: int, to_ts: int) -> list[dict[str, Any]]:
     rows: list[dict[str, Any]] = []
-    page = 0
+    page = 1
     while True:
         payload = _request(
             "/invoices",
@@ -163,10 +170,11 @@ def fetch_paid_invoices(from_ts: int, to_ts: int) -> list[dict[str, Any]]:
         if not batch:
             break
         rows.extend(batch)
-        if len(batch) < 100:
+        pagination = data.get("pagination") or {}
+        if not pagination.get("next_page_exist"):
             break
-        page += 1
-        if page > 200:
+        page = int(pagination.get("next_page") or page + 1)
+        if page > 50:
             break
     return rows
 
@@ -176,17 +184,20 @@ def fetch_locations() -> list[str]:
         payload = _request("/appointment/locations")
     except RuntimeError:
         return []
-    data = payload.get("data") or {}
-    locations = data.get("locations") or data.get("locationData") or data
-    if isinstance(locations, list):
-        names = []
-        for item in locations:
-            if isinstance(item, dict):
-                names.append(item.get("name") or item.get("store_name") or str(item))
-            else:
-                names.append(str(item))
-        return [n for n in names if n]
-    return []
+    data = payload.get("data")
+    if isinstance(data, list):
+        locations = data
+    elif isinstance(data, dict):
+        locations = data.get("locations") or data.get("locationData") or []
+    else:
+        locations = []
+    names = []
+    for item in locations:
+        if isinstance(item, dict):
+            names.append(item.get("name") or item.get("store_name") or str(item))
+        else:
+            names.append(str(item))
+    return [n for n in names if n]
 
 
 def build_profit_block(target: date | None = None) -> dict[str, Any]:
@@ -197,7 +208,6 @@ def build_profit_block(target: date | None = None) -> dict[str, Any]:
         "duna": "Duna",
         "plaza": "Duna",
     }
-
     day_start, day_end = day_bounds(target)
     month_start, month_end = month_bounds(target)
 
@@ -214,6 +224,7 @@ def build_profit_block(target: date | None = None) -> dict[str, Any]:
             "repairdesk": {
                 "status": "ok",
                 "basis": "cash",
+                "note": "Lista nézet: befizetés összeg + számla dátum (payment_date nélkül).",
                 "locations": locations or list(DEFAULT_STORES),
                 "today": {
                     "total": round(day_totals.total, 2),
@@ -235,8 +246,8 @@ def build_profit_block(target: date | None = None) -> dict[str, Any]:
                 "status": "error",
                 "message": str(exc),
                 "hint": (
-                    "RepairDesk → Store Settings → API key: másold be a repairdesk_api secretbe. "
-                    "Ha 401: új kulcs generálás szükséges."
+                    "RepairDesk → Store Settings → API key → repairdesk_api secret. "
+                    "Auth: Authorization: Bearer <key> (ne query api_key)."
                 ),
             },
         }
