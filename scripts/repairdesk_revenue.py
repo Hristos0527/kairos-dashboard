@@ -1,16 +1,23 @@
 #!/usr/bin/env python3
-"""RepairDesk cash-basis revenue (payments received) for Kairos profit block."""
+"""RepairDesk cash-basis revenue (payments received) for Kairos profit block.
+
+Auth model:
+- The team secret ``repairdesk_api`` is the master key (Bearer auth) used to
+  list store locations via ``/appointment/locations``.
+- Each location exposes its own ``api_key`` in that response. Per-store invoice
+  listings require that store-specific key as a query parameter
+  (``?api_key=<store_key>``); Bearer auth returns an empty result for them.
+"""
 
 from __future__ import annotations
 
 import json
 import os
 import re
-import time
 import urllib.error
 import urllib.parse
 import urllib.request
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from datetime import date, datetime, timezone
 from typing import Any
 
@@ -19,20 +26,31 @@ DEFAULT_STORES = ("Allee", "Etele", "Duna")
 
 
 @dataclass
+class StoreRevenue:
+    name: str
+    today: float = 0.0
+    month_to_date: float = 0.0
+    invoice_count: int = 0
+
+
+@dataclass
 class RevenueTotals:
-    total: float = 0.0
-    by_store: dict[str, float] | None = None
+    today: float = 0.0
+    month_to_date: float = 0.0
+    by_store: dict[str, StoreRevenue] = field(default_factory=dict)
+    invoice_count: int = 0
 
 
-def api_key() -> str:
+def master_key() -> str:
     return (
         os.environ.get("repairdesk_api", "").strip()
         or os.environ.get("Repairdesk", "").strip()
     )
 
 
-def _request(path: str, params: dict[str, Any] | None = None) -> dict[str, Any]:
-    key = api_key()
+def _master_request(path: str, params: dict[str, Any] | None = None) -> dict[str, Any]:
+    """Call RepairDesk with the master key using Bearer auth."""
+    key = master_key()
     if not key:
         raise RuntimeError("Missing repairdesk_api secret")
 
@@ -55,7 +73,33 @@ def _request(path: str, params: dict[str, Any] | None = None) -> dict[str, Any]:
 
     if not payload.get("success"):
         code = payload.get("statusCode")
-        msg = payload.get("message") or payload.get("data", {}).get("message")
+        msg = payload.get("message") or (payload.get("data") or {}).get("message")
+        raise RuntimeError(f"RepairDesk API {code}: {msg}")
+    return payload
+
+
+def _store_request(path: str, store_key: str, params: dict[str, Any] | None = None) -> dict[str, Any]:
+    """Call RepairDesk with a per-store key as query param (Bearer returns empty)."""
+    q = dict(params or {})
+    q["api_key"] = store_key
+    url = f"{BASE_URL}{path}?{urllib.parse.urlencode(q)}"
+    req = urllib.request.Request(
+        url,
+        headers={
+            "Accept": "application/json",
+            "User-Agent": "Mozilla/5.0 (compatible; KairosProfit/1.0)",
+        },
+    )
+    try:
+        with urllib.request.urlopen(req, timeout=45) as resp:
+            payload = json.loads(resp.read().decode())
+    except urllib.error.HTTPError as exc:
+        body = exc.read().decode(errors="replace")[:300]
+        raise RuntimeError(f"RepairDesk HTTP {exc.code}: {body}") from exc
+
+    if not payload.get("success"):
+        code = payload.get("statusCode")
+        msg = payload.get("message") or (payload.get("data") or {}).get("message")
         raise RuntimeError(f"RepairDesk API {code}: {msg}")
     return payload
 
@@ -68,11 +112,9 @@ def parse_money(value: Any) -> float:
     text = str(value).strip()
     if not text:
         return 0.0
-    # Keep digits, comma, dot, minus
     cleaned = re.sub(r"[^\d,.\-]", "", text.replace(" ", ""))
     if not cleaned:
         return 0.0
-    # European: 1.234,56 → 1234.56
     if "," in cleaned and "." in cleaned:
         if cleaned.rfind(",") > cleaned.rfind("."):
             cleaned = cleaned.replace(".", "").replace(",", ".")
@@ -102,60 +144,47 @@ def month_bounds(d: date) -> tuple[int, int]:
     return int(start.timestamp()), end
 
 
-def normalize_store(name: str, aliases: dict[str, str]) -> str:
-    raw = (name or "").strip() or "Unknown"
-    lower = raw.lower()
-    for key, label in aliases.items():
-        if key.lower() in lower:
-            return label
+def short_store_name(full_name: str) -> str:
+    """'LCDFIX Allee' → 'Allee'."""
+    raw = (full_name or "").strip()
+    if not raw:
+        return "Unknown"
+    lowered = raw.lower()
+    for prefix in ("lcdfix ", "lcd fix "):
+        if lowered.startswith(prefix):
+            return raw[len(prefix):].strip() or raw
     return raw
 
 
-def sum_payments_in_range(
-    invoices: list[dict[str, Any]],
-    start_ts: int,
-    end_ts: int,
-    aliases: dict[str, str],
-) -> RevenueTotals:
-    by_store: dict[str, float] = {}
-    total = 0.0
-
-    for row in invoices:
-        summary = row.get("summary") if isinstance(row.get("summary"), dict) else row
-        store_info = summary.get("store_info") or {}
-        store = normalize_store(
-            store_info.get("name") or summary.get("store_name", ""),
-            aliases,
-        )
-        payments = row.get("payments") or summary.get("payments") or []
-        if payments:
-            for payment in payments:
-                ts = int(payment.get("payment_date") or payment.get("created_on") or 0)
-                if ts < start_ts or ts > end_ts:
-                    continue
-                amount = parse_money(payment.get("amount") or payment.get("symbol_amount"))
-                total += amount
-                by_store[store] = by_store.get(store, 0.0) + amount
-        else:
-            created = int(summary.get("created_date") or 0)
-            if start_ts <= created <= end_ts:
-                amount = parse_money(
-                    summary.get("amount_paid")
-                    or summary.get("total_without_symbol")
-                    or summary.get("total")
-                )
-                total += amount
-                by_store[store] = by_store.get(store, 0.0) + amount
-
-    return RevenueTotals(total=total, by_store=by_store)
+def fetch_locations() -> list[dict[str, str]]:
+    """Return list of {id, name, api_key} for each store location."""
+    payload = _master_request("/appointment/locations")
+    data = payload.get("data")
+    if isinstance(data, list):
+        items = data
+    elif isinstance(data, dict):
+        items = data.get("locations") or data.get("locationData") or []
+    else:
+        items = []
+    out = []
+    for item in items:
+        if not isinstance(item, dict):
+            continue
+        key = item.get("api_key") or ""
+        name = item.get("name") or item.get("store_name") or ""
+        lid = str(item.get("id") or "")
+        if key and name:
+            out.append({"id": lid, "name": short_store_name(name), "api_key": key})
+    return out
 
 
-def fetch_paid_invoices(from_ts: int, to_ts: int) -> list[dict[str, Any]]:
+def fetch_store_invoices(store_key: str, from_ts: int, to_ts: int) -> list[dict[str, Any]]:
     rows: list[dict[str, Any]] = []
     page = 1
     while True:
-        payload = _request(
+        payload = _store_request(
             "/invoices",
+            store_key,
             {
                 "page": page,
                 "pagesize": 100,
@@ -179,43 +208,57 @@ def fetch_paid_invoices(from_ts: int, to_ts: int) -> list[dict[str, Any]]:
     return rows
 
 
-def fetch_locations() -> list[str]:
-    try:
-        payload = _request("/appointment/locations")
-    except RuntimeError:
-        return []
-    data = payload.get("data")
-    if isinstance(data, list):
-        locations = data
-    elif isinstance(data, dict):
-        locations = data.get("locations") or data.get("locationData") or []
-    else:
-        locations = []
-    names = []
-    for item in locations:
-        if isinstance(item, dict):
-            names.append(item.get("name") or item.get("store_name") or str(item))
-        else:
-            names.append(str(item))
-    return [n for n in names if n]
+def sum_store_in_range(
+    invoices: list[dict[str, Any]],
+    day_start: int,
+    day_end: int,
+    month_start: int,
+    month_end: int,
+) -> tuple[float, float, int]:
+    today_total = 0.0
+    mtd_total = 0.0
+    count = 0
+    for row in invoices:
+        summary = row.get("summary") if isinstance(row.get("summary"), dict) else row
+        created = int(summary.get("created_date") or 0)
+        amount = parse_money(
+            summary.get("amount_paid")
+            or summary.get("total_without_symbol")
+            or summary.get("total")
+        )
+        if month_start <= created <= month_end:
+            mtd_total += amount
+            count += 1
+            if day_start <= created <= day_end:
+                today_total += amount
+    return today_total, mtd_total, count
 
 
 def build_profit_block(target: date | None = None) -> dict[str, Any]:
     target = target or date.today()
-    aliases = {
-        "allee": "Allee",
-        "etele": "Etele",
-        "duna": "Duna",
-        "plaza": "Duna",
-    }
     day_start, day_end = day_bounds(target)
     month_start, month_end = month_bounds(target)
 
     try:
         locations = fetch_locations()
-        invoices_month = fetch_paid_invoices(month_start, month_end)
-        month_totals = sum_payments_in_range(invoices_month, month_start, month_end, aliases)
-        day_totals = sum_payments_in_range(invoices_month, day_start, day_end, aliases)
+        if not locations:
+            raise RuntimeError(
+                "No store locations returned — check repairdesk_api master key"
+            )
+
+        by_store: dict[str, StoreRevenue] = {}
+        for loc in locations:
+            invoices = fetch_store_invoices(loc["api_key"], month_start, month_end)
+            today, mtd, cnt = sum_store_in_range(
+                invoices, day_start, day_end, month_start, month_end
+            )
+            by_store[loc["name"]] = StoreRevenue(
+                name=loc["name"], today=today, month_to_date=mtd, invoice_count=cnt
+            )
+
+        today_total = round(sum(s.today for s in by_store.values()), 2)
+        mtd_total = round(sum(s.month_to_date for s in by_store.values()), 2)
+        invoice_total = sum(s.invoice_count for s in by_store.values())
 
         return {
             "status": "ok",
@@ -224,17 +267,17 @@ def build_profit_block(target: date | None = None) -> dict[str, Any]:
             "repairdesk": {
                 "status": "ok",
                 "basis": "cash",
-                "note": "Lista nézet: befizetés összeg + számla dátum (payment_date nélkül).",
-                "locations": locations or list(DEFAULT_STORES),
+                "note": "Üzletenkénti API kulcs (locations → api_key). Befizetés összeg + számla dátum.",
+                "locations": [s.name for s in by_store.values()],
                 "today": {
-                    "total": round(day_totals.total, 2),
-                    "by_store": {k: round(v, 2) for k, v in (day_totals.by_store or {}).items()},
+                    "total": today_total,
+                    "by_store": {k: round(v.today, 2) for k, v in by_store.items()},
                 },
                 "month_to_date": {
-                    "total": round(month_totals.total, 2),
-                    "by_store": {k: round(v, 2) for k, v in (month_totals.by_store or {}).items()},
+                    "total": mtd_total,
+                    "by_store": {k: round(v.month_to_date, 2) for k, v in by_store.items()},
                 },
-                "invoice_count": len(invoices_month),
+                "invoice_count": invoice_total,
             },
         }
     except Exception as exc:  # noqa: BLE001 — surface API errors in dashboard JSON
@@ -246,8 +289,8 @@ def build_profit_block(target: date | None = None) -> dict[str, Any]:
                 "status": "error",
                 "message": str(exc),
                 "hint": (
-                    "RepairDesk → Store Settings → API key → repairdesk_api secret. "
-                    "Auth: Authorization: Bearer <key> (ne query api_key)."
+                    "Master kulcs (repairdesk_api) Bearer auth → /appointment/locations "
+                    "→ üzletenkénti api_key query paraméterrel."
                 ),
             },
         }

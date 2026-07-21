@@ -460,25 +460,29 @@
     "repairdesk": {
       "status": "ok",
       "basis": "cash",
-      "note": "Lista nézet: befizetés összeg + számla dátum (payment_date nélkül).",
+      "note": "Üzletenkénti API kulcs (locations → api_key). Befizetés összeg + számla dátum.",
       "locations": [
-        "LCDFIX Allee",
-        "LCDFIX Etele",
-        "LCDFIX Duna"
+        "Allee",
+        "Etele",
+        "Duna"
       ],
       "today": {
-        "total": 1068690.0,
+        "total": 1428890.0,
         "by_store": {
-          "Allee": 1068690.0
+          "Allee": 1185290.0,
+          "Etele": 127000.0,
+          "Duna": 116600.0
         }
       },
       "month_to_date": {
-        "total": 21867110.04,
+        "total": 31090100.04,
         "by_store": {
-          "Allee": 21867110.04
+          "Allee": 21983710.04,
+          "Etele": 5040500.0,
+          "Duna": 4065890.0
         }
       },
-      "invoice_count": 865
+      "invoice_count": 1488
     }
   }
 }
