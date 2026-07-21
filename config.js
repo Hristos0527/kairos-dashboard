@@ -7,6 +7,8 @@
 window.KAIROS_CONFIG = {
   // Personal GCP OAuth Web client (same family as workspace-personal MCP)
   clientId: '889345739957-avtk5njo2d1ai1gc5259f4e71jja0tu0.apps.googleusercontent.com',
+  // Must sign in with personal — not info@gluxshop.hu
+  loginHint: 'hristos.lcdfix@gmail.com',
   scopes: [
     'https://www.googleapis.com/auth/tasks',
     'https://www.googleapis.com/auth/calendar.events',

@@ -23,11 +23,13 @@
   </header>
 
   <div id="auth-banner" class="banner">
-    <strong>Interaktív mód:</strong> lépj be Google-lel (personal: hristos.lcdfix@gmail.com),
-    utána kipipálhatod a személyes taskeket, és ±15p / időválasztóval mozgathatod a naptáreseményeket.
-    Első belépéshez a Client ID-nél legyen origin:
-    <code>https://hristos0527.github.io</code>
-    — részletek: README.
+    <strong>Google belépés:</strong> használd a
+    <code>hristos.lcdfix@gmail.com</code> fiókot (ne <code>info@gluxshop.hu</code>).
+    Ha „no registered origin” / 401 hibát kapsz: Google Cloud Console →
+    <a href="https://console.cloud.google.com/apis/credentials?project=889345739957" target="_blank" rel="noopener">Credentials</a>
+    → OAuth Web client (<code>889345739957-avtk…</code>) →
+    <strong>Authorized JavaScript origins</strong> → add hozzá:
+    <code>https://hristos0527.github.io</code> → Save → várj ~1 percet → próbáld újra.
   </div>
 
   <main class="grid">

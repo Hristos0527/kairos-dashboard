@@ -131,14 +131,16 @@ function initGis() {
     return;
   }
   state.gisReady = true;
+  const { loginHint } = cfg();
   state.tokenClient = google.accounts.oauth2.initTokenClient({
     client_id: clientId,
     scope: scopes,
+    hint: loginHint || 'hristos.lcdfix@gmail.com',
     callback: (resp) => {
       if (resp.error) {
         console.error(resp);
         toast(
-          `OAuth hiba: ${resp.error}. Ellenőrizd a Client ID Authorized JavaScript origins-t (https://hristos0527.github.io).`,
+          `OAuth hiba: ${resp.error}. GCP → Credentials → Web client → Authorized JavaScript origins: https://hristos0527.github.io — és lépj be hristos.lcdfix@gmail.com-mal (ne gluxshop).`,
           'error',
         );
         return;
@@ -171,7 +173,8 @@ function requestAuth(prompt) {
       resolve(resp.access_token);
       prev?.(resp);
     };
-    state.tokenClient.requestAccessToken({ prompt: prompt || '' });
+    const hint = cfg().loginHint || 'hristos.lcdfix@gmail.com';
+    state.tokenClient.requestAccessToken({ prompt: prompt || '', hint });
   });
 }
 
