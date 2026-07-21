@@ -533,60 +533,103 @@ function renderProfit(el) {
   }
 
   const rd = profit.repairdesk || {};
+  const sh = profit.shopify || {};
+  let html = '';
+
+  // RepairDesk section
   if (rd.status === 'error') {
-    el.innerHTML = `
+    html += `
       <div class="profit-error">
         <strong>RepairDesk:</strong> ${escapeHtml(rd.message || 'ismeretlen hiba')}
         <p class="profit-muted">${escapeHtml(rd.hint || '')}</p>
       </div>`;
-    return;
+  } else {
+    const rdToday = rd.today || {};
+    const rdMtd = rd.month_to_date || {};
+    const stores = Object.keys(rdMtd.by_store || {});
+    const storeRows = stores.length
+      ? stores.map((name) => `
+          <tr>
+            <td>${escapeHtml(name)}</td>
+            <td class="num">${fmtHuf(rdToday.by_store?.[name] ?? 0)}</td>
+            <td class="num">${fmtHuf(rdMtd.by_store?.[name] ?? 0)}</td>
+          </tr>`).join('')
+      : '<tr><td colspan="3" class="profit-muted">Nincs üzlet bontás</td></tr>';
+    html += `
+      <h3 class="profit-h3">RepairDesk <span class="profit-muted">készpénz · 3 üzlet</span></h3>
+      <div class="profit-kpis">
+        <div class="profit-kpi">
+          <span class="label">Ma (RD)</span>
+          <span class="value">${fmtHuf(rdToday.total ?? 0)}</span>
+        </div>
+        <div class="profit-kpi">
+          <span class="label">Hónap (MTD)</span>
+          <span class="value">${fmtHuf(rdMtd.total ?? 0)}</span>
+        </div>
+        <div class="profit-kpi muted">
+          <span class="label">Számlák</span>
+          <span class="value small">${rd.invoice_count ?? 0} db</span>
+        </div>
+      </div>
+      <table class="profit-table">
+        <thead><tr><th>Üzlet</th><th>Ma</th><th>Hónap</th></tr></thead>
+        <tbody>${storeRows}</tbody>
+        <tfoot>
+          <tr>
+            <td><strong>Összesen</strong></td>
+            <td class="num"><strong>${fmtHuf(rdToday.total ?? 0)}</strong></td>
+            <td class="num"><strong>${fmtHuf(rdMtd.total ?? 0)}</strong></td>
+          </tr>
+        </tfoot>
+      </table>`;
   }
 
-  const today = rd.today || {};
-  const mtd = rd.month_to_date || {};
-  const stores = Object.keys(mtd.by_store || {});
-  const storeRows = stores.length
-    ? stores
-        .map(
-          (name) => `
-        <tr>
-          <td>${escapeHtml(name)}</td>
-          <td class="num">${fmtHuf(today.by_store?.[name] ?? 0)}</td>
-          <td class="num">${fmtHuf(mtd.by_store?.[name] ?? 0)}</td>
-        </tr>`,
-        )
-        .join('')
-    : '<tr><td colspan="3" class="profit-muted">Nincs üzlet bontás (még)</td></tr>';
+  // Shopify section
+  if (sh.status === 'error') {
+    html += `
+      <div class="profit-error">
+        <strong>Shopify:</strong> ${escapeHtml(sh.message || 'ismeretlen hiba')}
+      </div>`;
+  } else {
+    const shToday = sh.today || {};
+    const shMtd = sh.month_to_date || {};
+    const hasData = (shToday.orders ?? 0) > 0 || (shMtd.orders ?? 0) > 0;
+    const warning = !hasData ? '<p class="profit-warning">Nincs júliusi Shopify adat — lásd megjegyzés lent.</p>' : '';
+    html += `
+      <h3 class="profit-h3">Shopify (GluX) <span class="profit-muted">bevétel · profit = bevétel − COGS</span></h3>
+      <div class="profit-kpis">
+        <div class="profit-kpi">
+          <span class="label">Ma bevétel</span>
+          <span class="value">${fmtHuf(shToday.revenue ?? 0)}</span>
+        </div>
+        <div class="profit-kpi profit-kpi--green">
+          <span class="label">Ma profit</span>
+          <span class="value">${fmtHuf(shToday.profit ?? 0)}</span>
+        </div>
+        <div class="profit-kpi muted">
+          <span class="label">Ma rendelés</span>
+          <span class="value small">${shToday.orders ?? 0} db</span>
+        </div>
+      </div>
+      <div class="profit-kpis">
+        <div class="profit-kpi">
+          <span class="label">Hónap bevétel</span>
+          <span class="value">${fmtHuf(shMtd.revenue ?? 0)}</span>
+        </div>
+        <div class="profit-kpi profit-kpi--green">
+          <span class="label">Hónap profit</span>
+          <span class="value">${fmtHuf(shMtd.profit ?? 0)}</span>
+        </div>
+        <div class="profit-kpi muted">
+          <span class="label">Hónap rendelés</span>
+          <span class="value small">${shMtd.orders ?? 0} db</span>
+        </div>
+      </div>
+      ${warning}`;
+  }
 
-  el.innerHTML = `
-    <div class="profit-kpis">
-      <div class="profit-kpi">
-        <span class="label">Ma (RepairDesk)</span>
-        <span class="value">${fmtHuf(today.total ?? 0)}</span>
-      </div>
-      <div class="profit-kpi">
-        <span class="label">Hónap (MTD)</span>
-        <span class="value">${fmtHuf(mtd.total ?? 0)}</span>
-      </div>
-      <div class="profit-kpi muted">
-        <span class="label">Alap</span>
-        <span class="value small">készpénz / befizetés</span>
-      </div>
-    </div>
-    <table class="profit-table">
-      <thead>
-        <tr><th>Üzlet</th><th>Ma</th><th>Hónap</th></tr>
-      </thead>
-      <tbody>${storeRows}</tbody>
-      <tfoot>
-        <tr>
-          <td><strong>Összesen</strong></td>
-          <td class="num"><strong>${fmtHuf(today.total ?? 0)}</strong></td>
-          <td class="num"><strong>${fmtHuf(mtd.total ?? 0)}</strong></td>
-        </tr>
-      </tfoot>
-    </table>
-    <p class="profit-muted">Shopify + hirdetések + fix költség következő lépés. Szinkron: esti agent / <code>sync_profit.py</code>.</p>`;
+  html += '<p class="profit-muted">Hirdetés költés + fix költség következő lépés. Szinkron: esti agent / <code>sync_profit.py</code>.</p>';
+  el.innerHTML = html;
   if (section) section.hidden = false;
 }
 

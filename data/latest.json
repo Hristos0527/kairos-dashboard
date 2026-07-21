@@ -483,6 +483,24 @@
         }
       },
       "invoice_count": 1488
+    },
+    "shopify": {
+      "status": "ok",
+      "currency": "HUF",
+      "today": {
+        "revenue": 0.0,
+        "cogs": 0.0,
+        "profit": 0.0,
+        "orders": 0
+      },
+      "month_to_date": {
+        "revenue": 0.0,
+        "cogs": 0.0,
+        "profit": 0.0,
+        "orders": 0
+      },
+      "cost_source": "product_costs.json",
+      "note": "Bevétel = subtotalPrice. Profit = bevétel − COGS (SKU költség × db). Ha product_costs.json hiányzik, COGS = 0 (profit = bevétel)."
     }
   }
 }

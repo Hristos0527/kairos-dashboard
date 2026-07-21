@@ -101,6 +101,24 @@ h2 .hint {
 }
 .profit-loading { color: var(--muted); margin: 0; }
 
+.profit-h3 {
+  margin: 0 0 0.75rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text);
+}
+.profit-h3 + .profit-kpis { margin-bottom: 0.5rem; }
+.profit-kpi--green .value { color: var(--glux); }
+.profit-warning {
+  color: var(--medium);
+  font-size: 0.82rem;
+  margin: 0.5rem 0 0;
+  padding: 0.5rem 0.75rem;
+  background: rgba(240, 192, 64, 0.08);
+  border: 1px solid rgba(240, 192, 64, 0.25);
+  border-radius: 6px;
+}
+
 .meta {
   display: flex;
   flex-wrap: wrap;
