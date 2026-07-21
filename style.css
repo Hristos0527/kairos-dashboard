@@ -182,7 +182,21 @@ h2 .hint {
   font-family: inherit;
 }
 .chip:hover:not(:disabled) { border-color: var(--accent); color: var(--accent); }
+.chip.danger:hover:not(:disabled) { border-color: var(--high); color: var(--high); }
 .chip:disabled, .time-input:disabled { opacity: 0.4; cursor: not-allowed; }
+
+.source-tag {
+  font-size: 0.65rem;
+  padding: 0.1rem 0.35rem;
+  border-radius: 4px;
+  background: rgba(139, 156, 179, 0.2);
+  color: var(--muted);
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-left: 0.25rem;
+}
+.source-tag.kind { background: rgba(91, 159, 212, 0.2); color: var(--accent); }
+.tasks li.deleted { opacity: 0.35; }
 
 .time-input {
   padding: 0.2rem 0.35rem;

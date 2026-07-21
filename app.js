@@ -232,6 +232,60 @@ async function patchEvent(event, startIso, endIso) {
   );
 }
 
+async function deleteTaskApi(task) {
+  const listId = encodeURIComponent(task.task_list_id || cfg().taskListId || '@default');
+  const taskId = encodeURIComponent(task.task_id);
+  return apiFetch(
+    `https://tasks.googleapis.com/tasks/v1/lists/${listId}/tasks/${taskId}`,
+    { method: 'DELETE' },
+  );
+}
+
+async function deleteCalendarEvent(event) {
+  const calId = encodeURIComponent(event.calendar_id || cfg().kairosCalendarId);
+  const eventId = encodeURIComponent(event.event_id);
+  return apiFetch(
+    `https://www.googleapis.com/calendar/v3/calendars/${calId}/events/${eventId}`,
+    { method: 'DELETE' },
+  );
+}
+
+function allCalendarDays() {
+  const cal = state.data?.calendar || {};
+  return ['today', 'tomorrow', 'thursday', 'all_day']
+    .map((k) => ({ key: k, list: cal[k] || [] }))
+    .filter((x) => Array.isArray(x.list));
+}
+
+function findLinkedEventForTask(task) {
+  if (!task?.task_id) return null;
+  for (const { list } of allCalendarDays()) {
+    const hit = list.find((e) => e.task_id === task.task_id && e.event_id);
+    if (hit) return hit;
+  }
+  return null;
+}
+
+function removeEventFromState(eventId) {
+  for (const { list } of allCalendarDays()) {
+    const idx = list.findIndex((e) => e.event_id === eventId);
+    if (idx >= 0) {
+      list.splice(idx, 1);
+      return true;
+    }
+  }
+  return false;
+}
+
+function removeTaskFromState(bucket, taskId) {
+  const list = state.data?.tasks?.[bucket];
+  if (!list) return false;
+  const idx = list.findIndex((t) => t.task_id === taskId);
+  if (idx < 0) return false;
+  list.splice(idx, 1);
+  return true;
+}
+
 function findEvent(day, eventId) {
   const list = state.data?.calendar?.[day] || [];
   return list.find((e) => e.event_id === eventId);
@@ -335,14 +389,22 @@ function renderTasks(el, items, bucket) {
       const checkbox = editable
         ? `<input type="checkbox" class="task-check" data-bucket="${bucket}" data-id="${escapeHtml(t.task_id)}" ${done ? 'checked' : ''} ${canCheck ? '' : 'disabled'} />`
         : `<span class="task-lock" title="Más fiók — csak Google link">↗</span>`;
+      const delBtn = editable
+        ? `<button type="button" class="chip danger" data-action="delete-task" data-bucket="${bucket}" data-id="${escapeHtml(t.task_id)}" ${isAuthed() && !done ? '' : 'disabled'} title="Törlés">✕</button>`
+        : '';
+      const pd = t.pipedrive_url
+        ? `<a class="mini-link" href="${escapeHtml(t.pipedrive_url)}" target="_blank" rel="noopener">Pipedrive</a>`
+        : '';
       return `
-      <li class="${done ? 'done' : ''}" data-task-id="${escapeHtml(t.task_id || '')}">
+      <li class="${done ? 'done' : ''}${t._deleted ? ' deleted' : ''}" data-task-id="${escapeHtml(t.task_id || '')}">
         <label class="task-main">
           ${checkbox}
           <span class="task-title">${escapeHtml(t.title)}</span>
         </label>
         <span class="task-meta">
+          ${pd}
           ${google}
+          ${delBtn}
           <span class="badge ${escapeHtml(t.priority || 'low')}">${escapeHtml(t.priority || '')}</span>
         </span>
       </li>`;
