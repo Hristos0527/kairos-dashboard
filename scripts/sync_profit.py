@@ -13,7 +13,6 @@ from shopify_revenue import build_shopify_block
 
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_JSON = ROOT / "data" / "latest.json"
-SHOPIFY_CACHE = ROOT / "data" / "shopify_orders_cache.json"
 
 
 def main() -> None:
@@ -24,11 +23,7 @@ def main() -> None:
 
     target = date.fromisoformat(args.date) if args.date else date.today()
     profit = build_profit_block(target)
-
-    shopify_orders: list[dict] = []
-    if SHOPIFY_CACHE.exists():
-        shopify_orders = json.loads(SHOPIFY_CACHE.read_text(encoding="utf-8"))
-    profit["shopify"] = build_shopify_block(shopify_orders, target)
+    profit["shopify"] = build_shopify_block(target)
 
     path = args.json
     if path.exists():
@@ -38,9 +33,21 @@ def main() -> None:
     data["profit"] = profit
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+
+    rd = profit.get("repairdesk", {})
+    sh = profit.get("shopify", {})
     print(f"Updated {path}")
-    print(f"  repairdesk: {profit['repairdesk']['status']} — today {profit['repairdesk'].get('today',{}).get('total',0):,.0f} Ft")
-    print(f"  shopify:    {profit['shopify']['status']} — today {profit['shopify']['today']['revenue']:,.0f} Ft revenue, {profit['shopify']['today']['profit']:,.0f} Ft profit, {profit['shopify']['today']['orders']} orders")
+    print(
+        f"  repairdesk: {rd.get('status')} — today "
+        f"{rd.get('today', {}).get('total', 0):,.0f} Ft"
+    )
+    print(
+        f"  shopify:    {sh.get('status')} — today "
+        f"{sh.get('today', {}).get('revenue', 0):,.0f} Ft revenue, "
+        f"{sh.get('today', {}).get('profit', 0):,.0f} Ft profit, "
+        f"{sh.get('today', {}).get('orders', 0)} orders "
+        f"(source={sh.get('source')})"
+    )
 
 
 if __name__ == "__main__":

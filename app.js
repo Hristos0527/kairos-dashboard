@@ -584,19 +584,21 @@ function renderProfit(el) {
       </table>`;
   }
 
-  // Shopify section
+  // Shopify section (ShopifyQL sales report — not per-order)
   if (sh.status === 'error') {
     html += `
       <div class="profit-error">
-        <strong>Shopify:</strong> ${escapeHtml(sh.message || 'ismeretlen hiba')}
+        <strong>Shopify:</strong> ${escapeHtml(sh.error || sh.message || 'ismeretlen hiba')}
+        <p class="profit-muted">${escapeHtml(sh.hint || '')}</p>
       </div>`;
   } else {
     const shToday = sh.today || {};
     const shMtd = sh.month_to_date || {};
-    const hasData = (shToday.orders ?? 0) > 0 || (shMtd.orders ?? 0) > 0;
-    const warning = !hasData ? '<p class="profit-warning">Nincs júliusi Shopify adat — lásd megjegyzés lent.</p>' : '';
+    const hasData = (shToday.orders ?? 0) > 0 || (shMtd.orders ?? 0) > 0 || (shToday.revenue ?? 0) > 0;
+    const warning = !hasData ? '<p class="profit-warning">Nincs Shopify sales adat erre a napra.</p>' : '';
+    const src = sh.source === 'shopifyql' ? 'ShopifyQL sales' : 'Shopify';
     html += `
-      <h3 class="profit-h3">Shopify (GluX) <span class="profit-muted">bevétel · profit = bevétel − COGS</span></h3>
+      <h3 class="profit-h3">Shopify (GluX) <span class="profit-muted">${escapeHtml(src)} · net − COGS</span></h3>
       <div class="profit-kpis">
         <div class="profit-kpi">
           <span class="label">Ma bevétel</span>

@@ -1,194 +1,190 @@
 #!/usr/bin/env python3
-"""Shopify revenue + profit (COGS deducted) for Kairos profit block.
+"""Shopify revenue + profit via ShopifyQL (Admin GraphQL shopifyqlQuery).
 
-Data sources:
-- Orders: Glux-shopify MCP ``get-orders`` (paged, filtered by date client-side)
-- Product cost: ``data/product_costs.json`` (SKU → cost per unit in HUF)
+Uses the same Dev Dashboard client credentials as the Glux-shopify MCP:
+  MYSHOPIFY_DOMAIN, SHOPIFY_CLIENT_ID, SHOPIFY_CLIENT_SECRET
 
-Limitations:
-- The Glux-shopify MCP ``get-orders`` returns oldest-first with no date filter.
-  July 2026 orders need either a Pipedream Shopify connection (search-orders)
-  or a Shopify Admin API token for REST filtering.
-- Shopify variant ``cost`` is not exposed by the MCP; fill ``product_costs.json``.
+No per-order fetch — aggregates FROM sales (total_sales, net_sales, COGS, gross_profit).
+Requires write_reports (or read_reports) on the Shopify app.
 """
 
 from __future__ import annotations
 
 import json
 import os
-import re
 import urllib.error
 import urllib.parse
 import urllib.request
-from dataclasses import dataclass, field
-from datetime import date, datetime, timezone
-from pathlib import Path
+from datetime import date
 from typing import Any
 
-ROOT = Path(__file__).resolve().parents[1]
-COSTS_FILE = ROOT / "data" / "product_costs.json"
+API_VERSION = os.environ.get("SHOPIFY_API_VERSION", "2026-01")
 
 
-@dataclass
-class ShopifyTotals:
-    revenue: float = 0.0
-    cogs: float = 0.0
-    profit: float = 0.0
-    order_count: int = 0
-    by_product: dict[str, dict[str, float]] = field(default_factory=dict)
+def _env(name: str) -> str:
+    value = (os.environ.get(name) or "").strip()
+    if not value:
+        raise RuntimeError(f"Missing env {name}")
+    return value
 
 
-def parse_money(value: Any) -> float:
-    if value is None:
-        return 0.0
-    if isinstance(value, (int, float)):
-        return float(value)
-    text = str(value).strip()
-    if not text:
-        return 0.0
-    cleaned = re.sub(r"[^\d,.\-]", "", text.replace(" ", ""))
-    if not cleaned:
-        return 0.0
-    if "," in cleaned and "." in cleaned:
-        if cleaned.rfind(",") > cleaned.rfind("."):
-            cleaned = cleaned.replace(".", "").replace(",", ".")
-        else:
-            cleaned = cleaned.replace(",", "")
-    elif "," in cleaned:
-        cleaned = cleaned.replace(",", ".")
+def exchange_token() -> tuple[str, str]:
+    """Return (access_token, shop_domain) via client_credentials."""
+    domain = _env("MYSHOPIFY_DOMAIN")
+    body = urllib.parse.urlencode(
+        {
+            "grant_type": "client_credentials",
+            "client_id": _env("SHOPIFY_CLIENT_ID"),
+            "client_secret": _env("SHOPIFY_CLIENT_SECRET"),
+        }
+    ).encode()
+    req = urllib.request.Request(
+        f"https://{domain}/admin/oauth/access_token",
+        data=body,
+        headers={"Content-Type": "application/x-www-form-urlencoded"},
+        method="POST",
+    )
+    with urllib.request.urlopen(req, timeout=30) as resp:
+        data = json.loads(resp.read().decode())
+    token = data.get("access_token")
+    if not token:
+        raise RuntimeError("Shopify token exchange returned no access_token")
+    return token, domain
+
+
+def graphql(domain: str, token: str, query: str) -> dict[str, Any]:
+    payload = json.dumps({"query": query}).encode()
+    req = urllib.request.Request(
+        f"https://{domain}/admin/api/{API_VERSION}/graphql.json",
+        data=payload,
+        headers={
+            "Content-Type": "application/json",
+            "X-Shopify-Access-Token": token,
+        },
+        method="POST",
+    )
+    with urllib.request.urlopen(req, timeout=60) as resp:
+        return json.loads(resp.read().decode())
+
+
+def shopifyql(domain: str, token: str, sql: str) -> list[dict[str, Any]]:
+    query = (
+        "{ shopifyqlQuery(query: %s) { parseErrors tableData { rows } } }"
+        % json.dumps(sql)
+    )
+    data = graphql(domain, token, query)
+    node = (data.get("data") or {}).get("shopifyqlQuery") or {}
+    errors = node.get("parseErrors") or []
+    if errors:
+        raise RuntimeError(f"ShopifyQL parseErrors: {errors}")
+    if data.get("errors"):
+        raise RuntimeError(f"GraphQL errors: {data['errors']}")
+    table = node.get("tableData") or {}
+    return list(table.get("rows") or [])
+
+
+def _money(row: dict[str, Any], key: str) -> float:
     try:
-        return float(cleaned)
-    except ValueError:
+        return float(row.get(key) or 0)
+    except (TypeError, ValueError):
         return 0.0
 
 
-def day_bounds(d: date) -> tuple[int, int]:
-    start = datetime(d.year, d.month, d.day, tzinfo=timezone.utc)
-    end = datetime(d.year, d.month, d.day, 23, 59, 59, tzinfo=timezone.utc)
-    return int(start.timestamp()), int(end.timestamp())
-
-
-def month_bounds(d: date) -> tuple[int, int]:
-    start = datetime(d.year, d.month, 1, tzinfo=timezone.utc)
-    if d.month == 12:
-        next_month = datetime(d.year + 1, 1, 1, tzinfo=timezone.utc)
-    else:
-        next_month = datetime(d.year, d.month + 1, 1, tzinfo=timezone.utc)
-    end = int(next_month.timestamp()) - 1
-    return int(start.timestamp()), end
-
-
-def load_costs() -> dict[str, float]:
-    """Load SKU → cost per unit (HUF) from data/product_costs.json."""
-    if not COSTS_FILE.exists():
-        return {}
-    data = json.loads(COSTS_FILE.read_text(encoding="utf-8"))
-    costs: dict[str, float] = {}
-    for item in data.get("products", []):
-        sku = (item.get("sku") or "").strip()
-        cost = parse_money(item.get("cost"))
-        if sku and cost:
-            costs[sku] = cost
-    return costs
-
-
-def order_in_range(order: dict[str, Any], start_ts: int, end_ts: int) -> bool:
-    created = order.get("createdAt") or order.get("created_at") or ""
-    if not created:
-        return False
+def _int(row: dict[str, Any], key: str) -> int:
     try:
-        ts = int(datetime.fromisoformat(created.replace("Z", "+00:00")).timestamp())
-    except (ValueError, TypeError):
-        return False
-    return start_ts <= ts <= end_ts
+        return int(float(row.get(key) or 0))
+    except (TypeError, ValueError):
+        return 0
 
 
-def is_paid(order: dict[str, Any]) -> bool:
-    status = (order.get("financialStatus") or order.get("financial_status") or "").upper()
-    return status in ("PAID", "PARTIALLY_PAID", "PARTIALLY_REFUNDED")
+def _period(row: dict[str, Any]) -> dict[str, Any]:
+    net = _money(row, "net_sales")
+    cogs = _money(row, "cost_of_goods_sold")
+    profit = row.get("gross_profit")
+    profit_f = _money(row, "gross_profit") if profit is not None else net - cogs
+    return {
+        "revenue": round(net, 2),
+        "total_sales": round(_money(row, "total_sales"), 2),
+        "gross_sales": round(_money(row, "gross_sales"), 2),
+        "cogs": round(cogs, 2),
+        "profit": round(profit_f, 2),
+        "orders": _int(row, "orders"),
+    }
 
 
-def sum_order(order: dict[str, Any], costs: dict[str, float]) -> tuple[float, float, float]:
-    """Return (revenue, cogs, profit) for a single order."""
-    revenue = parse_money((order.get("subtotalPrice") or {}).get("amount") or order.get("totalPrice", {}).get("amount"))
-    cogs = 0.0
-    for item in order.get("lineItems", []):
-        qty = int(item.get("quantity") or 0)
-        variant = item.get("variant") or {}
-        sku = (variant.get("sku") or "").strip()
-        unit_cost = costs.get(sku, 0.0)
-        cogs += unit_cost * qty
-    profit = revenue - cogs
-    return revenue, cogs, profit
-
-
-def build_shopify_block(
-    orders: list[dict[str, Any]],
-    target: date | None = None,
-) -> dict[str, Any]:
+def build_shopify_block(target: date | None = None) -> dict[str, Any]:
+    """Fetch today + MTD sales aggregates via ShopifyQL."""
     target = target or date.today()
-    day_start, day_end = day_bounds(target)
-    month_start, month_end = month_bounds(target)
-    costs = load_costs()
+    day = target.isoformat()
+    month_start = target.replace(day=1).isoformat()
 
-    day_totals = ShopifyTotals()
-    mtd_totals = ShopifyTotals()
+    try:
+        token, domain = exchange_token()
+    except Exception as exc:  # noqa: BLE001 — surface as status for dashboard
+        return {
+            "status": "error",
+            "currency": "HUF",
+            "source": "shopifyql",
+            "error": str(exc),
+            "hint": "Set MYSHOPIFY_DOMAIN + SHOPIFY_CLIENT_ID + SHOPIFY_CLIENT_SECRET (same as Glux-shopify MCP).",
+            "today": {"revenue": 0, "cogs": 0, "profit": 0, "orders": 0},
+            "month_to_date": {"revenue": 0, "cogs": 0, "profit": 0, "orders": 0},
+        }
 
-    for order in orders:
-        if not is_paid(order):
-            continue
-        rev, cogs, profit = sum_order(order, costs)
-        created = order.get("createdAt") or ""
-        try:
-            ts = int(datetime.fromisoformat(created.replace("Z", "+00:00")).timestamp())
-        except (ValueError, TypeError):
-            continue
+    sql_today = (
+        "FROM sales SHOW total_sales, net_sales, gross_sales, orders, "
+        f"cost_of_goods_sold, gross_profit SINCE {day} UNTIL {day}"
+    )
+    sql_mtd = (
+        "FROM sales SHOW total_sales, net_sales, gross_sales, orders, "
+        f"cost_of_goods_sold, gross_profit SINCE {month_start} UNTIL {day}"
+    )
 
-        if month_start <= ts <= month_end:
-            mtd_totals.revenue += rev
-            mtd_totals.cogs += cogs
-            mtd_totals.profit += profit
-            mtd_totals.order_count += 1
-            if day_start <= ts <= day_end:
-                day_totals.revenue += rev
-                day_totals.cogs += cogs
-                day_totals.profit += profit
-                day_totals.order_count += 1
+    try:
+        today_rows = shopifyql(domain, token, sql_today)
+        mtd_rows = shopifyql(domain, token, sql_mtd)
+    except urllib.error.HTTPError as exc:
+        body = exc.read().decode("utf-8", "ignore")[:500]
+        return {
+            "status": "error",
+            "currency": "HUF",
+            "source": "shopifyql",
+            "error": f"HTTP {exc.code}: {body}",
+            "today": {"revenue": 0, "cogs": 0, "profit": 0, "orders": 0},
+            "month_to_date": {"revenue": 0, "cogs": 0, "profit": 0, "orders": 0},
+        }
+    except Exception as exc:  # noqa: BLE001
+        return {
+            "status": "error",
+            "currency": "HUF",
+            "source": "shopifyql",
+            "error": str(exc),
+            "today": {"revenue": 0, "cogs": 0, "profit": 0, "orders": 0},
+            "month_to_date": {"revenue": 0, "cogs": 0, "profit": 0, "orders": 0},
+        }
+
+    today = _period((today_rows or [{}])[0])
+    mtd = _period((mtd_rows or [{}])[0])
 
     return {
         "status": "ok",
         "currency": "HUF",
-        "today": {
-            "revenue": round(day_totals.revenue, 2),
-            "cogs": round(day_totals.cogs, 2),
-            "profit": round(day_totals.profit, 2),
-            "orders": day_totals.order_count,
-        },
-        "month_to_date": {
-            "revenue": round(mtd_totals.revenue, 2),
-            "cogs": round(mtd_totals.cogs, 2),
-            "profit": round(mtd_totals.profit, 2),
-            "orders": mtd_totals.order_count,
-        },
-        "cost_source": str(COSTS_FILE.name) if COSTS_FILE.exists() else "missing",
+        "source": "shopifyql",
+        "as_of": day,
+        "today": today,
+        "month_to_date": mtd,
         "note": (
-            "Bevétel = subtotalPrice. Profit = bevétel − COGS (SKU költség × db). "
-            "Ha product_costs.json hiányzik, COGS = 0 (profit = bevétel)."
+            "ShopifyQL FROM sales (Admin API). "
+            "Bevétel = net_sales, COGS = cost_of_goods_sold, Profit = gross_profit."
         ),
     }
 
 
 def main() -> None:
-    # Standalone test: load orders from a cached JSON file
-    cache = ROOT / "data" / "shopify_orders_cache.json"
-    if cache.exists():
-        orders = json.loads(cache.read_text(encoding="utf-8"))
-    else:
-        orders = []
-        print(f"Note: {cache} not found — populate via MCP get-orders first", flush=True)
+    import sys
 
-    block = build_shopify_block(orders)
-    print(json.dumps(block, ensure_ascii=False, indent=2))
+    target = date.fromisoformat(sys.argv[1]) if len(sys.argv) > 1 else date.today()
+    print(json.dumps(build_shopify_block(target), ensure_ascii=False, indent=2))
 
 
 if __name__ == "__main__":
