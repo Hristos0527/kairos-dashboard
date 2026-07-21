@@ -452,5 +452,15 @@
         "reason": "LCDFIX / Dóri könyvelés"
       }
     ]
+  },
+  "profit": {
+    "status": "error",
+    "currency": "HUF",
+    "as_of": "2026-07-21",
+    "repairdesk": {
+      "status": "error",
+      "message": "RepairDesk API 401: Unauthorized",
+      "hint": "RepairDesk → Store Settings → API key: másold be a repairdesk_api secretbe. Ha 401: új kulcs generálás szükséges."
+    }
   }
 }

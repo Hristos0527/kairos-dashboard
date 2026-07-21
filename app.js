@@ -513,6 +513,83 @@ function renderList(el, items, empty = '—') {
     .join('');
 }
 
+function fmtHuf(amount) {
+  const n = Number(amount);
+  if (!Number.isFinite(n)) return '—';
+  return new Intl.NumberFormat('hu-HU', {
+    style: 'currency',
+    currency: 'HUF',
+    maximumFractionDigits: 0,
+  }).format(n);
+}
+
+function renderProfit(el) {
+  if (!el) return;
+  const profit = state.data?.profit;
+  const section = document.getElementById('section-profit');
+  if (!profit) {
+    el.innerHTML = '<p class="profit-muted">Nincs profit blokk — futtasd: <code>python3 scripts/sync_profit.py</code></p>';
+    return;
+  }
+
+  const rd = profit.repairdesk || {};
+  if (rd.status === 'error') {
+    el.innerHTML = `
+      <div class="profit-error">
+        <strong>RepairDesk:</strong> ${escapeHtml(rd.message || 'ismeretlen hiba')}
+        <p class="profit-muted">${escapeHtml(rd.hint || '')}</p>
+      </div>`;
+    return;
+  }
+
+  const today = rd.today || {};
+  const mtd = rd.month_to_date || {};
+  const stores = Object.keys(mtd.by_store || {});
+  const storeRows = stores.length
+    ? stores
+        .map(
+          (name) => `
+        <tr>
+          <td>${escapeHtml(name)}</td>
+          <td class="num">${fmtHuf(today.by_store?.[name] ?? 0)}</td>
+          <td class="num">${fmtHuf(mtd.by_store?.[name] ?? 0)}</td>
+        </tr>`,
+        )
+        .join('')
+    : '<tr><td colspan="3" class="profit-muted">Nincs üzlet bontás (még)</td></tr>';
+
+  el.innerHTML = `
+    <div class="profit-kpis">
+      <div class="profit-kpi">
+        <span class="label">Ma (RepairDesk)</span>
+        <span class="value">${fmtHuf(today.total ?? 0)}</span>
+      </div>
+      <div class="profit-kpi">
+        <span class="label">Hónap (MTD)</span>
+        <span class="value">${fmtHuf(mtd.total ?? 0)}</span>
+      </div>
+      <div class="profit-kpi muted">
+        <span class="label">Alap</span>
+        <span class="value small">készpénz / befizetés</span>
+      </div>
+    </div>
+    <table class="profit-table">
+      <thead>
+        <tr><th>Üzlet</th><th>Ma</th><th>Hónap</th></tr>
+      </thead>
+      <tbody>${storeRows}</tbody>
+      <tfoot>
+        <tr>
+          <td><strong>Összesen</strong></td>
+          <td class="num"><strong>${fmtHuf(today.total ?? 0)}</strong></td>
+          <td class="num"><strong>${fmtHuf(mtd.total ?? 0)}</strong></td>
+        </tr>
+      </tfoot>
+    </table>
+    <p class="profit-muted">Shopify + hirdetések + fix költség következő lépés. Szinkron: esti agent / <code>sync_profit.py</code>.</p>`;
+  if (section) section.hidden = false;
+}
+
 function renderEmailStatus(el) {
   const section = document.getElementById('section-email');
   if (!el) return;
@@ -570,6 +647,7 @@ function renderAll() {
     if (thuSection) thuSection.hidden = !thu.length;
     if (thu.length) renderTimeline(thuEl, thu, 'thursday');
   }
+  renderProfit(document.getElementById('profit-panel'));
   renderList(document.getElementById('free-slots'), data.free_slots);
   renderList(document.getElementById('warnings'), data.warnings, 'Minden rendben.');
   renderTasks(document.getElementById('tasks-personal'), data.tasks?.personal, 'personal');
