@@ -366,12 +366,28 @@ function renderTimeline(el, events, dayKey) {
     .join('');
 }
 
+/** Pipedrive/Gmail activity-sync all-day noise — never render on dashboard */
+function isAllDayNoise(e) {
+  if (!e) return true;
+  // Gluxshop calendar all-day = PD activity sync dump
+  if (e.source === 'gluxshop' && e.kind !== 'task') return true;
+  // User pref: tasks stay in Tasks list + timed [Kairos] blocks — not all-day clutter
+  if (e.source === 'gluxshop' && e.kind === 'task') return true;
+  const t = String(e.title || '');
+  if (/^Elküldött e-mail:/i.test(t)) return true;
+  if (/^(Support|Feladat)$/i.test(t)) return true;
+  if (e.pipedrive_activity_id && e.all_day) return true;
+  if (/pipedrive\.com/i.test(String(e.url || e.description || ''))) return true;
+  return false;
+}
+
 /** All-day / egésznapos — no shift controls; Google link + source badge */
 function renderAllDay(el, events) {
   const section = document.getElementById('section-all-day');
   const hint = document.getElementById('all-day-hint');
   if (!el) return;
-  if (!events?.length) {
+  events = (events || []).filter((e) => !isAllDayNoise(e));
+  if (!events.length) {
     if (section) section.hidden = true;
     el.innerHTML = '';
     return;
