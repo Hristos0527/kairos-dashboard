@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-21T17:20:00+02:00",
+  "generated_at": "2026-07-21T17:25:00+02:00",
   "schedule_date": "2026-07-21",
   "account": "hristos.lcdfix@gmail.com",
   "auth": {
@@ -42,23 +42,88 @@
         "source": "personal"
       },
       {
-        "title": "[Kairos] Görög videók átnézése (Dóri)",
-        "start": "2026-07-21T17:50:00+02:00",
-        "end": "2026-07-21T18:15:00+02:00",
-        "location": "Otthon / iroda",
+        "title": "[Kairos] Aroma Dryos — checkout ár eltérés",
+        "start": "2026-07-21T17:30:00+02:00",
+        "end": "2026-07-21T18:00:00+02:00",
+        "location": "Online",
         "type": "kairos",
-        "event_id": "cvtphmsrkql15p2e8drtjlti4k",
+        "event_id": "21gqqmhd86obapig265peenfhg",
+        "calendar_id": "73661aa7f8ac58bd811558f8cbed7d3b30dfc104a1c5d1fd3a884220d742e26d@group.calendar.google.com",
+        "task_id": "Z0xKSFhBdnRBMHlmTUc4Qg",
+        "editable": true,
+        "google_url": "https://www.google.com/calendar/event?eid=MjFncXFtaGQ4Nm9iYXBpZzI2NXBlZW5maGcgNzM2NjFhYTdmOGFjNThiZDgxMTU1OGY4Y2JlZDdkM2IzMGRmYzEwNGExYzVkMWZkM2E4ODQyMjBkNzQyZTI2ZEBn",
+        "url": "https://mail.google.com/mail/u/0/#all/19f85417cdd77293",
+        "source": "email",
+        "gmail_url": "https://mail.google.com/mail/u/0/#all/19f85417cdd77293",
+        "gmail_message_id": "19f85417cdd77293"
+      },
+      {
+        "title": "[Kairos] Görög videók átnézése (Dóri)",
+        "start": "2026-07-21T18:05:00+02:00",
+        "end": "2026-07-21T18:30:00+02:00",
+        "location": "Online",
+        "type": "kairos",
+        "event_id": "84rjodg5164st4r3i0dqimgdpk",
         "calendar_id": "73661aa7f8ac58bd811558f8cbed7d3b30dfc104a1c5d1fd3a884220d742e26d@group.calendar.google.com",
         "task_id": "NEtZSUxjbUlLVGx5UVViZQ",
         "editable": true,
-        "google_url": "https://www.google.com/calendar/event?eid=Y3Z0cGhtc3JrcWwxNXAyZThkcnRqbHRpNGsgNzM2NjFhYTdmOGFjNThiZDgxMTU1OGY4Y2JlZDdkM2IzMGRmYzEwNGExYzVkMWZkM2E4ODQyMjBkNzQyZTI2ZEBn",
+        "google_url": "https://www.google.com/calendar/event?eid=ODRyam9kZzUxNjRzdDRyM2kwZHFpbWdkcGsgNzM2NjFhYTdmOGFjNThiZDgxMTU1OGY4Y2JlZDdkM2IzMGRmYzEwNGExYzVkMWZkM2E4ODQyMjBkNzQyZTI2ZEBn",
         "pipedrive_activity_id": 4904,
         "pipedrive_url": "https://gluxshop.pipedrive.com/activity/4904",
         "url": "https://gluxshop.pipedrive.com/activity/4904",
         "source": "pipedrive"
       }
     ],
-    "tomorrow": [],
+    "tomorrow": [
+      {
+        "title": "[Kairos] Mangon 83-84. videó átnézése",
+        "start": "2026-07-22T10:00:00+02:00",
+        "end": "2026-07-22T10:45:00+02:00",
+        "location": "Online",
+        "type": "kairos",
+        "event_id": "le802bnm6rr1hu083b85s2nbno",
+        "calendar_id": "73661aa7f8ac58bd811558f8cbed7d3b30dfc104a1c5d1fd3a884220d742e26d@group.calendar.google.com",
+        "task_id": "SkZHaG5pc0tUWGtSSUh5eQ",
+        "editable": true,
+        "google_url": "https://www.google.com/calendar/event?eid=bGU4MDJibm02cnIxaHUwODNiODVzMm5ibm8gNzM2NjFhYTdmOGFjNThiZDgxMTU1OGY4Y2JlZDdkM2IzMGRmYzEwNGExYzVkMWZkM2E4ODQyMjBkNzQyZTI2ZEBn",
+        "url": "https://mail.google.com/mail/u/0/#all/19f84b6452a30dc9",
+        "source": "email",
+        "gmail_url": "https://mail.google.com/mail/u/0/#all/19f84b6452a30dc9",
+        "gmail_message_id": "19f84b6452a30dc9"
+      },
+      {
+        "title": "[Kairos] eMAG Sameday HU AWB (határidő 07.23)",
+        "start": "2026-07-22T11:00:00+02:00",
+        "end": "2026-07-22T11:30:00+02:00",
+        "location": "Online",
+        "type": "kairos",
+        "event_id": "fo1e9qkkdefsa7dnk07nsbsh6s",
+        "calendar_id": "73661aa7f8ac58bd811558f8cbed7d3b30dfc104a1c5d1fd3a884220d742e26d@group.calendar.google.com",
+        "task_id": "b2hkdjB3YkZYdUJIektBcg",
+        "editable": true,
+        "google_url": "https://www.google.com/calendar/event?eid=Zm8xZTlxa2tkZWZzYTdkbmswN25zYnNoNnMgNzM2NjFhYTdmOGFjNThiZDgxMTU1OGY4Y2JlZDdkM2IzMGRmYzEwNGExYzVkMWZkM2E4ODQyMjBkNzQyZTI2ZEBn",
+        "url": "https://mail.google.com/mail/u/0/#all/19f84fa9abbccc5e",
+        "source": "email",
+        "gmail_url": "https://mail.google.com/mail/u/0/#all/19f84fa9abbccc5e",
+        "gmail_message_id": "19f84fa9abbccc5e"
+      },
+      {
+        "title": "[Kairos] Zapier held tasks / plan",
+        "start": "2026-07-22T14:00:00+02:00",
+        "end": "2026-07-22T14:30:00+02:00",
+        "location": "Online",
+        "type": "kairos",
+        "event_id": "v9pl1a68g1vjg98u3br7flolag",
+        "calendar_id": "73661aa7f8ac58bd811558f8cbed7d3b30dfc104a1c5d1fd3a884220d742e26d@group.calendar.google.com",
+        "task_id": "dDF1Q3p1bERpb1ZzblU0Uw",
+        "editable": true,
+        "google_url": "https://www.google.com/calendar/event?eid=djlwbDFhNjhnMXZqZzk4dTNicjdmbG9sYWcgNzM2NjFhYTdmOGFjNThiZDgxMTU1OGY4Y2JlZDdkM2IzMGRmYzEwNGExYzVkMWZkM2E4ODQyMjBkNzQyZTI2ZEBn",
+        "url": "https://mail.google.com/mail/u/0/#all/19f8059fbe4bcbad",
+        "source": "email",
+        "gmail_url": "https://mail.google.com/mail/u/0/#all/19f8059fbe4bcbad",
+        "gmail_message_id": "19f8059fbe4bcbad"
+      }
+    ],
     "thursday": [
       {
         "title": "[Kairos] Grenton hívni — jön-e este villanyszerelő?",
@@ -72,25 +137,127 @@
         "editable": true,
         "google_url": "https://www.google.com/calendar/event?eid=MHZsOGExcDJzbG9kaWY4bDQ2aDA4Z2EzNG8gNzM2NjFhYTdmOGFjNThiZDgxMTU1OGY4Y2JlZDdkM2IzMGRmYzEwNGExYzVkMWZkM2E4ODQyMjBkNzQyZTI2ZEBn",
         "source": "personal",
-        "url": "https://www.google.com/calendar/event?eid=MHZsOGExcDJzbG9kaWY4bDQ2aDA4Z2EzNG8gNzM2NjFhYTdmOGFjNThiZDgxMTU1OGY4Y2JlZDdkM2IzMGRmYzEwNGExYzVkMWZkM2E4ODQyMjBkNzQyZTI2ZEBn"
+        "url": "https://tasks.google.com/task/aDJic29uX2JPZG5CUnBWMw"
+      },
+      {
+        "title": "[Kairos] Duna Terasz — júliusi költségbekérő",
+        "start": "2026-07-23T10:15:00+02:00",
+        "end": "2026-07-23T10:45:00+02:00",
+        "location": "Online",
+        "type": "kairos",
+        "event_id": "b65s985gh5192artrphnnb7j00",
+        "calendar_id": "73661aa7f8ac58bd811558f8cbed7d3b30dfc104a1c5d1fd3a884220d742e26d@group.calendar.google.com",
+        "task_id": "b2dyMEZqVW84NnlkbVBaRA",
+        "editable": true,
+        "google_url": "https://www.google.com/calendar/event?eid=YjY1czk4NWdoNTE5MmFydHJwaG5uYjdqMDAgNzM2NjFhYTdmOGFjNThiZDgxMTU1OGY4Y2JlZDdkM2IzMGRmYzEwNGExYzVkMWZkM2E4ODQyMjBkNzQyZTI2ZEBn",
+        "url": "https://mail.google.com/mail/u/0/#all/19f8089f40ada699",
+        "source": "email",
+        "gmail_url": "https://mail.google.com/mail/u/0/#all/19f8089f40ada699",
+        "gmail_message_id": "19f8089f40ada699"
+      },
+      {
+        "title": "[Kairos] Nők Lapja Egészség — megjelenés ajánlat",
+        "start": "2026-07-23T11:00:00+02:00",
+        "end": "2026-07-23T11:30:00+02:00",
+        "location": "Online",
+        "type": "kairos",
+        "event_id": "ch2eh94ugneeqi4c0slaendtkc",
+        "calendar_id": "73661aa7f8ac58bd811558f8cbed7d3b30dfc104a1c5d1fd3a884220d742e26d@group.calendar.google.com",
+        "task_id": "SjNJbXBiaDFtNmhmZnRndg",
+        "editable": true,
+        "google_url": "https://www.google.com/calendar/event?eid=Y2gyZWg5NHVnbmVlcWk0YzBzbGFlbmR0a2MgNzM2NjFhYTdmOGFjNThiZDgxMTU1OGY4Y2JlZDdkM2IzMGRmYzEwNGExYzVkMWZkM2E4ODQyMjBkNzQyZTI2ZEBn",
+        "url": "https://mail.google.com/mail/u/0/#all/19f848be51597291",
+        "source": "email",
+        "gmail_url": "https://mail.google.com/mail/u/0/#all/19f848be51597291",
+        "gmail_message_id": "19f848be51597291"
       }
     ],
     "all_day": []
   },
   "free_slots": [
     {
-      "start": "2026-07-21T14:55:00+02:00",
-      "end": "2026-07-21T15:55:00+02:00",
-      "label": "Ma délután — Allee előtt"
-    },
-    {
-      "start": "2026-07-21T17:15:00+02:00",
-      "end": "2026-07-21T20:30:00+02:00",
-      "label": "Ma este — Allee után"
+      "start": "2026-07-21T18:30:00+02:00",
+      "end": "2026-07-21T21:00:00+02:00",
+      "label": "Ma este — blokkok után"
     }
   ],
   "tasks": {
     "personal": [
+      {
+        "title": "[email] Aroma Dryos — checkout ár eltérés (246 vs 312 EUR)",
+        "priority": "high",
+        "due": "2026-07-21",
+        "task_id": "Z0xKSFhBdnRBMHlmTUc4Qg",
+        "task_list_id": "@default",
+        "editable": true,
+        "google_url": "https://tasks.google.com/task/Z0xKSFhBdnRBMHlmTUc4Qg",
+        "url": "https://mail.google.com/mail/u/0/#all/19f85417cdd77293",
+        "source": "email",
+        "gmail_url": "https://mail.google.com/mail/u/0/#all/19f85417cdd77293",
+        "gmail_message_id": "19f85417cdd77293",
+        "event_id": "21gqqmhd86obapig265peenfhg",
+        "calendar_id": "73661aa7f8ac58bd811558f8cbed7d3b30dfc104a1c5d1fd3a884220d742e26d@group.calendar.google.com"
+      },
+      {
+        "title": "[email] Mangon 83-84. videó átnézése",
+        "priority": "medium",
+        "due": "2026-07-22",
+        "task_id": "SkZHaG5pc0tUWGtSSUh5eQ",
+        "task_list_id": "@default",
+        "editable": true,
+        "google_url": "https://tasks.google.com/task/SkZHaG5pc0tUWGtSSUh5eQ",
+        "url": "https://mail.google.com/mail/u/0/#all/19f84b6452a30dc9",
+        "source": "email",
+        "gmail_url": "https://mail.google.com/mail/u/0/#all/19f84b6452a30dc9",
+        "gmail_message_id": "19f84b6452a30dc9",
+        "event_id": "le802bnm6rr1hu083b85s2nbno",
+        "calendar_id": "73661aa7f8ac58bd811558f8cbed7d3b30dfc104a1c5d1fd3a884220d742e26d@group.calendar.google.com"
+      },
+      {
+        "title": "[email] eMAG Sameday HU AWB generálás (határidő 07.23)",
+        "priority": "high",
+        "due": "2026-07-23",
+        "task_id": "b2hkdjB3YkZYdUJIektBcg",
+        "task_list_id": "@default",
+        "editable": true,
+        "google_url": "https://tasks.google.com/task/b2hkdjB3YkZYdUJIektBcg",
+        "url": "https://mail.google.com/mail/u/0/#all/19f84fa9abbccc5e",
+        "source": "email",
+        "gmail_url": "https://mail.google.com/mail/u/0/#all/19f84fa9abbccc5e",
+        "gmail_message_id": "19f84fa9abbccc5e",
+        "event_id": "fo1e9qkkdefsa7dnk07nsbsh6s",
+        "calendar_id": "73661aa7f8ac58bd811558f8cbed7d3b30dfc104a1c5d1fd3a884220d742e26d@group.calendar.google.com"
+      },
+      {
+        "title": "[email] Zapier — 63 held task + plan limit",
+        "priority": "medium",
+        "due": "2026-07-22",
+        "task_id": "dDF1Q3p1bERpb1ZzblU0Uw",
+        "task_list_id": "@default",
+        "editable": true,
+        "google_url": "https://tasks.google.com/task/dDF1Q3p1bERpb1ZzblU0Uw",
+        "url": "https://mail.google.com/mail/u/0/#all/19f8059fbe4bcbad",
+        "source": "email",
+        "gmail_url": "https://mail.google.com/mail/u/0/#all/19f8059fbe4bcbad",
+        "gmail_message_id": "19f8059fbe4bcbad",
+        "event_id": "v9pl1a68g1vjg98u3br7flolag",
+        "calendar_id": "73661aa7f8ac58bd811558f8cbed7d3b30dfc104a1c5d1fd3a884220d742e26d@group.calendar.google.com"
+      },
+      {
+        "title": "[email] Duna Terasz Grande — júliusi költségbekérő",
+        "priority": "medium",
+        "due": "2026-07-24",
+        "task_id": "b2dyMEZqVW84NnlkbVBaRA",
+        "task_list_id": "@default",
+        "editable": true,
+        "google_url": "https://tasks.google.com/task/b2dyMEZqVW84NnlkbVBaRA",
+        "url": "https://mail.google.com/mail/u/0/#all/19f8089f40ada699",
+        "source": "email",
+        "gmail_url": "https://mail.google.com/mail/u/0/#all/19f8089f40ada699",
+        "gmail_message_id": "19f8089f40ada699",
+        "event_id": "b65s985gh5192artrphnnb7j00",
+        "calendar_id": "73661aa7f8ac58bd811558f8cbed7d3b30dfc104a1c5d1fd3a884220d742e26d@group.calendar.google.com"
+      },
       {
         "title": "[email] Görög marketinges levél átnézése (Dóri / Pipedrive)",
         "priority": "medium",
@@ -119,7 +286,9 @@
         "source": "email",
         "gmail_url": "https://mail.google.com/mail/u/0/#all/19f848be51597291",
         "gmail_message_id": "19f848be51597291",
-        "url": "https://mail.google.com/mail/u/0/#all/19f848be51597291"
+        "url": "https://mail.google.com/mail/u/0/#all/19f848be51597291",
+        "event_id": "ch2eh94ugneeqi4c0slaendtkc",
+        "calendar_id": "73661aa7f8ac58bd811558f8cbed7d3b30dfc104a1c5d1fd3a884220d742e26d@group.calendar.google.com"
       },
       {
         "title": "Grenton hivni",
@@ -146,7 +315,7 @@
         "pipedrive_url": "https://gluxshop.pipedrive.com/activity/4904",
         "url": "https://gluxshop.pipedrive.com/activity/4904",
         "source": "pipedrive",
-        "event_id": "cvtphmsrkql15p2e8drtjlti4k",
+        "event_id": "84rjodg5164st4r3i0dqimgdpk",
         "calendar_id": "73661aa7f8ac58bd811558f8cbed7d3b30dfc104a1c5d1fd3a884220d742e26d@group.calendar.google.com"
       }
     ],
@@ -176,34 +345,29 @@
         "source": "gluxshop"
       }
     ],
-    "gluxshop_completed_today": [
-      {
-        "title": "Slack gergo",
-        "task_id": "d0F5UkVHX0c4V0ItTUJsRA",
-        "completed_at": "2026-07-21T14:00:13.545Z",
-        "account": "info@gluxshop.eu"
-      },
-      {
-        "title": "Lcdfix+glux Cursor",
-        "task_id": "RTlCM0pSbWpSRnhQSWQ5VA",
-        "completed_at": "2026-07-21T14:00:07.660Z",
-        "account": "info@gluxshop.eu"
-      },
-      {
-        "title": "Elina rendeles+ api",
-        "task_id": "a21NdW9qd0ZFUVROUWxZVQ",
-        "completed_at": "2026-07-21T14:00:01.767Z",
-        "account": "info@gluxshop.eu"
-      }
-    ],
     "skipped": [
+      {
+        "title": "Reklamáció #22092 — Szklenár Emőke",
+        "reason": "Dóri support/reklamáció",
+        "source": "email",
+        "gmail_url": "https://mail.google.com/mail/u/0/#all/19f838d6b401e13b",
+        "gmail_message_id": "19f838d6b401e13b",
+        "status": "completed_skip"
+      },
+      {
+        "title": "Hibás szenzor #23107 — Fercsák Nándor",
+        "reason": "Dóri support/hibás szenzor",
+        "source": "email",
+        "gmail_url": "https://mail.google.com/mail/u/0/#all/19f817b329103845",
+        "gmail_message_id": "19f817b329103845",
+        "status": "completed_skip"
+      },
       {
         "title": "Bellis e-számla — könyvelés",
         "reason": "Dóri",
         "source": "email",
         "gmail_url": "https://mail.google.com/mail/u/0/#all/19f8439fa8287cdd",
         "gmail_message_id": "19f8439fa8287cdd",
-        "task_id": "cDEzUVltRElUd0hPYkFnNg",
         "status": "completed_skip"
       },
       {
@@ -212,125 +376,81 @@
         "source": "email",
         "gmail_url": "https://mail.google.com/mail/u/0/#all/19f842557b6d396e",
         "gmail_message_id": "19f842557b6d396e",
-        "task_id": "OVJSVVE5LTFEQnVFMnU2Yg",
         "status": "completed_skip"
       }
     ]
   },
   "warnings": [
-    "Egésznapos szekció üres: PD/Gluxshop naptár zaj kiszűrve; open taskok timed [Kairos] blokkokban + Tasks listában",
-    "16:00–17:00 Allee meet — előtte buffer",
-    "Bellis + Macbook kivéve (Dóri / LCDFIX)",
-    "Pipedrive: csak Hristos owner_id=31088152",
-    "Gluxshop kipipálás: Google Tasks app / tasks.google.com — fiók: info@gluxshop.eu (nem Calendar)",
-    "Gluxshop batch naptáresemény törölve — soha többé batch blokk; Tasks = source of truth",
-    "Holnap 5 Pipedrive blokk = határidő nélküli backlog — user megerősítés kell törléshez",
-    "Grenton csütörtök 10:00 (due 07-23)",
-    "Bellis + Macbook emailből jöttek, skipelve (Dóri / LCDFIX)",
-    "Kipipálás/törlés: Google belépés (personal) — sync Tasks + Calendar együtt",
-    "Pipedrive linkek: PD gomb a teendőknél / naptárnál"
+    "Support/reklamáció/hibás szenzor = Dóri — nincs Hristos task/naptár",
+    "Holnapi stale PD blokkokat user törli — nem hoztuk vissza",
+    "Nincs Gluxshop batch naptáresemény",
+    "Minden actionable = külön Google Task + timed [Kairos] blokk",
+    "Grenton csütörtök 10:00 marad"
   ],
   "stats": {
     "open_personal": 9,
     "open_gluxshop": 2,
     "scheduled_today": 4,
-    "scheduled_tomorrow": 5,
-    "scheduled_thursday": 1,
+    "scheduled_tomorrow": 3,
+    "scheduled_thursday": 3,
     "conflicts": 0,
-    "all_day_today": 0,
-    "all_day_raw_gluxshop": 46,
-    "all_day_noise_filtered": 51,
-    "email_to_task": 2,
-    "email_skipped": 2,
-    "all_day_pd_calendar_filtered": 21,
-    "all_day_tasks_moved_to_timed": 5
-  },
-  "stale_review": {
-    "note": "Pipedrive MCP unavailable 2026-07-21 15:30 — Google Tasks still needsAction, no due dates. Not auto-deleted.",
-    "likely_older_backlog": [
-      "NAV #1546",
-      "B2B kontakt #2593",
-      "NAYAX #2640"
-    ],
-    "possibly_newer": [
-      "Shopify B2B #3510",
-      "Duna pláza #3507"
-    ],
-    "current": [
-      "Grenton due 2026-07-23"
-    ]
+    "email_to_task_new": 5,
+    "email_dedup": 2,
+    "email_skipped_support_dori": 2,
+    "email_skipped_other_typical": "~90+"
   },
   "email_audit": {
-    "as_of": "2026-07-21T15:45:00+02:00",
-    "became_open_tasks": [
+    "as_of": "2026-07-21T17:25:00+02:00",
+    "window": "newer_than:14d",
+    "became_open_tasks_new": [
       {
-        "title": "[email] Görög marketinges levél",
-        "gmail_id": "19f8495580453acc",
-        "note": "Pipedrive @mention + activity #6230"
+        "title": "[email] Aroma Dryos — checkout ár eltérés",
+        "gmail_id": "19f85417cdd77293",
+        "due": "2026-07-21",
+        "calendar": "2026-07-21T17:30"
       },
       {
-        "title": "[email] Nők Lapja Egészség ajánlat",
-        "gmail_id": "19f848be51597291",
-        "due": "2026-08-05"
+        "title": "[email] Mangon 83-84. videó",
+        "gmail_id": "19f84b6452a30dc9",
+        "due": "2026-07-22",
+        "calendar": "2026-07-22T10:00"
+      },
+      {
+        "title": "[email] eMAG Sameday HU AWB",
+        "gmail_id": "19f84fa9abbccc5e",
+        "due": "2026-07-23",
+        "calendar": "2026-07-22T11:00"
+      },
+      {
+        "title": "[email] Zapier held tasks",
+        "gmail_id": "19f8059fbe4bcbad",
+        "due": "2026-07-22",
+        "calendar": "2026-07-22T14:00"
+      },
+      {
+        "title": "[email] Duna Terasz költségbekérő",
+        "gmail_id": "19f8089f40ada699",
+        "due": "2026-07-24",
+        "calendar": "2026-07-23T10:15"
       }
+    ],
+    "dedup_existing": [
+      "Nők Lapja (SjNJbXBiaDFtNmhmZnRndg)",
+      "Görög marketinges (XzZiUk5EejNlMWYzMFV1SA)"
     ],
     "extracted_then_excluded": [
       {
-        "title": "Macbook Pro M4 — Nadabán",
-        "gmail_id": "19f842557b6d396e",
-        "reason": "LCDFIX szerviz"
+        "title": "Reklamáció #22092 Szklenár",
+        "reason": "Dóri support"
       },
       {
-        "title": "Bellis e-számla 7260092845",
-        "gmail_id": "19f8439fa8287cdd",
-        "reason": "Dóri könyvelés"
+        "title": "Hibás szenzor #23107 Fercsák",
+        "reason": "Dóri support"
+      },
+      {
+        "title": "Macbook / Bellis",
+        "reason": "LCDFIX / Dóri könyvelés"
       }
-    ],
-    "processed_no_task": [
-      "Wise átutalás",
-      "Slack digests",
-      "Google Business Profile",
-      "Partner Tele newsletter",
-      "Dockyard hírlevél"
     ]
-  },
-  "notes": {
-    "pipedrive_stale_cleanup": {
-      "at": "2026-07-21T15:54:17+02:00",
-      "completed_activity_ids": [
-        1546,
-        2593,
-        2640,
-        3507,
-        3510
-      ],
-      "action": "Marked done in Pipedrive + completed Google Tasks; Kairos tomorrow blocks already deleted",
-      "kept_open": [
-        4904,
-        6230
-      ]
-    },
-    "all_day_filter": {
-      "at": "2026-07-21T17:05:00+02:00",
-      "rule": "skip Gluxshop calendar all-day + do not show tasks as all-day; schedule open tasks as timed [Kairos] blocks",
-      "removed_from_all_day_ui": 26,
-      "pd_calendar_noise": 21,
-      "tasks_kept_in_google_tasks": true,
-      "timed_blocks_already_present": [
-        "[Kairos] Görög marketinges levél átnézése 15:35",
-        "[Kairos] Görög videók átnézése (Dóri) 17:50",
-        "[Kairos] Grenton hívni 2026-07-23 10:00"
-      ],
-      "gluxshop_calendar_not_deleted": true
-    },
-    "gluxshop_batch_removed": {
-      "at": "2026-07-21T17:20:00+02:00",
-      "event_id": "42bh1a51j8l8t3pi57ci1gqg1o",
-      "summary": "[Kairos] Gluxshop mai tasks batch",
-      "reason": "Calendar ≠ Tasks checkbox; user cannot complete fake batch event",
-      "rule": "forbid_batch_events; gluxshop_default=tasks_only; timed block requires real task_id",
-      "gluxshop_open_remaining": ["Garancia api", "CIB szamla megszuntetes"],
-      "gluxshop_completed_earlier_today": ["Slack gergo", "Lcdfix+glux Cursor", "Elina rendeles+ api"]
-    }
   }
 }
