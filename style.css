@@ -133,10 +133,35 @@ h2 .hint {
 .event.kairos { border-left-color: var(--kairos); }
 .event.meeting { border-left-color: var(--meeting); }
 .event.gluxshop, .event.pipedrive { border-left-color: var(--glux); }
+.event.all-day { border-left-color: var(--glux); background: rgba(107, 203, 119, 0.06); }
 
 .event-time { font-size: 0.8rem; color: var(--muted); font-variant-numeric: tabular-nums; }
 .event-title { font-weight: 500; }
 .event-loc { font-size: 0.8rem; color: var(--muted); margin-top: 0.15rem; }
+
+.source-tag {
+  display: inline-block;
+  margin-left: 0.35rem;
+  padding: 0.05rem 0.4rem;
+  border-radius: 4px;
+  font-size: 0.65rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  vertical-align: middle;
+  background: rgba(107, 203, 119, 0.18);
+  color: var(--glux);
+}
+.source-tag.kind {
+  background: rgba(91, 159, 212, 0.18);
+  color: var(--accent);
+}
+
+.timeline.all-day {
+  max-height: 28rem;
+  overflow-y: auto;
+  padding-right: 0.25rem;
+}
 
 .event-controls {
   display: flex;

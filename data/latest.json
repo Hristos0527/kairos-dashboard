@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-21T15:25:00+02:00",
+  "generated_at": "2026-07-21T15:40:00+02:00",
   "schedule_date": "2026-07-21",
   "account": "hristos.lcdfix@gmail.com",
   "auth": {
@@ -60,18 +60,6 @@
     ],
     "tomorrow": [
       {
-        "title": "[Kairos] Grenton hívni — jön-e este villanyszerelő?",
-        "start": "2026-07-22T10:00:00+02:00",
-        "end": "2026-07-22T10:01:00+02:00",
-        "location": "Telefon",
-        "type": "kairos",
-        "event_id": "0vl8a1p2slodif8l46h08ga34o",
-        "calendar_id": "73661aa7f8ac58bd811558f8cbed7d3b30dfc104a1c5d1fd3a884220d742e26d@group.calendar.google.com",
-        "task_id": "aDJic29uX2JPZG5CUnBWMw",
-        "editable": true,
-        "google_url": "https://www.google.com/calendar/event?eid=MHZsOGExcDJzbG9kaWY4bDQ2aDA4Z2EzNG8gNzM2NjFhYTdmOGFjNThiZDgxMTU1OGY4Y2JlZDdkM2IzMGRmYzEwNGExYzVkMWZkM2E4ODQyMjBkNzQyZTI2ZEBn"
-      },
-      {
         "title": "[Kairos] NAYAX telefonszám változás (Dóri)",
         "start": "2026-07-22T10:20:00+02:00",
         "end": "2026-07-22T10:50:00+02:00",
@@ -80,6 +68,8 @@
         "event_id": "0120ail4e5d33fbo1a4ebtpqdo",
         "calendar_id": "73661aa7f8ac58bd811558f8cbed7d3b30dfc104a1c5d1fd3a884220d742e26d@group.calendar.google.com",
         "task_id": "Ym1zVmptNkdnbFJuVUF2ZA",
+        "pipedrive_activity_id": 2640,
+        "stale_suspect": true,
         "editable": true,
         "google_url": "https://www.google.com/calendar/event?eid=MDEyMGFpbDRlNWQzM2ZibzFhNGVidHBxZG8gNzM2NjFhYTdmOGFjNThiZDgxMTU1OGY4Y2JlZDdkM2IzMGRmYzEwNGExYzVkMWZkM2E4ODQyMjBkNzQyZTI2ZEBn"
       },
@@ -92,6 +82,8 @@
         "event_id": "r7rmj5hgrkaumf1gj5lepj2plc",
         "calendar_id": "73661aa7f8ac58bd811558f8cbed7d3b30dfc104a1c5d1fd3a884220d742e26d@group.calendar.google.com",
         "task_id": "b0t2U3BBcG5INS1nRVZIUg",
+        "pipedrive_activity_id": 3510,
+        "stale_suspect": "maybe",
         "editable": true,
         "google_url": "https://www.google.com/calendar/event?eid=cjdybWo1aGdya2F1bWYxZ2o1bGVwajJwbGMgNzM2NjFhYTdmOGFjNThiZDgxMTU1OGY4Y2JlZDdkM2IzMGRmYzEwNGExYzVkMWZkM2E4ODQyMjBkNzQyZTI2ZEBn"
       },
@@ -104,6 +96,8 @@
         "event_id": "js8h7r4tkva2d82rhqah2ogdr8",
         "calendar_id": "73661aa7f8ac58bd811558f8cbed7d3b30dfc104a1c5d1fd3a884220d742e26d@group.calendar.google.com",
         "task_id": "YVFRTjFIVTZOdVlBYjVkaQ",
+        "pipedrive_activity_id": 3507,
+        "stale_suspect": "maybe",
         "editable": true,
         "google_url": "https://www.google.com/calendar/event?eid=anM4aDdyNHRrdmEyZDgycmhxYWgyb2dkcjggNzM2NjFhYTdmOGFjNThiZDgxMTU1OGY4Y2JlZDdkM2IzMGRmYzEwNGExYzVkMWZkM2E4ODQyMjBkNzQyZTI2ZEBn"
       },
@@ -116,6 +110,8 @@
         "event_id": "bl5sfcsoouht7gt9lodjj7e29o",
         "calendar_id": "73661aa7f8ac58bd811558f8cbed7d3b30dfc104a1c5d1fd3a884220d742e26d@group.calendar.google.com",
         "task_id": "WGxsSWR1dC1xdGY4encyaQ",
+        "pipedrive_activity_id": 2593,
+        "stale_suspect": true,
         "editable": true,
         "google_url": "https://www.google.com/calendar/event?eid=Ymw1c2Zjc29vdWh0N2d0OWxvZGpqN2UyOW8gNzM2NjFhYTdmOGFjNThiZDgxMTU1OGY4Y2JlZDdkM2IzMGRmYzEwNGExYzVkMWZkM2E4ODQyMjBkNzQyZTI2ZEBn"
       },
@@ -128,8 +124,359 @@
         "event_id": "b2t8fuvesi3fsm218vn158vufo",
         "calendar_id": "73661aa7f8ac58bd811558f8cbed7d3b30dfc104a1c5d1fd3a884220d742e26d@group.calendar.google.com",
         "task_id": "NUprSDhXYUtIZG9RbWVSbg",
+        "pipedrive_activity_id": 1546,
+        "stale_suspect": true,
         "editable": true,
         "google_url": "https://www.google.com/calendar/event?eid=YjJ0OGZ1dmVzaTNmc20yMTh2bjE1OHZ1Zm8gNzM2NjFhYTdmOGFjNThiZDgxMTU1OGY4Y2JlZDdkM2IzMGRmYzEwNGExYzVkMWZkM2E4ODQyMjBkNzQyZTI2ZEBn"
+      }
+    ],
+    "thursday": [
+      {
+        "title": "[Kairos] Grenton hívni — jön-e este villanyszerelő?",
+        "start": "2026-07-23T10:00:00+02:00",
+        "end": "2026-07-23T10:01:00+02:00",
+        "location": "Telefon",
+        "type": "kairos",
+        "event_id": "0vl8a1p2slodif8l46h08ga34o",
+        "calendar_id": "73661aa7f8ac58bd811558f8cbed7d3b30dfc104a1c5d1fd3a884220d742e26d@group.calendar.google.com",
+        "task_id": "aDJic29uX2JPZG5CUnBWMw",
+        "editable": true,
+        "google_url": "https://www.google.com/calendar/event?eid=MHZsOGExcDJzbG9kaWY4bDQ2aDA4Z2EzNG8gNzM2NjFhYTdmOGFjNThiZDgxMTU1OGY4Y2JlZDdkM2IzMGRmYzEwNGExYzVkMWZkM2E4ODQyMjBkNzQyZTI2ZEBn"
+      }
+    ],
+    "all_day": [
+      {
+        "title": "Slack gergo",
+        "start": "2026-07-21",
+        "end": "2026-07-22",
+        "all_day": true,
+        "type": "gluxshop",
+        "source": "gluxshop",
+        "kind": "task",
+        "task_id": "d0F5UkVHX0c4V0ItTUJsRA",
+        "editable": false,
+        "google_url": "https://tasks.google.com"
+      },
+      {
+        "title": "Garancia api",
+        "start": "2026-07-21",
+        "end": "2026-07-22",
+        "all_day": true,
+        "type": "gluxshop",
+        "source": "gluxshop",
+        "kind": "task",
+        "task_id": "UjlaYURoSUVSMm5sN1FzaQ",
+        "editable": false,
+        "google_url": "https://tasks.google.com"
+      },
+      {
+        "title": "Lcdfix+glux Cursor",
+        "start": "2026-07-21",
+        "end": "2026-07-22",
+        "all_day": true,
+        "type": "gluxshop",
+        "source": "gluxshop",
+        "kind": "task",
+        "task_id": "RTlCM0pSbWpSRnhQSWQ5VA",
+        "editable": false,
+        "google_url": "https://tasks.google.com"
+      },
+      {
+        "title": "Elina rendeles+ api",
+        "start": "2026-07-21",
+        "end": "2026-07-22",
+        "all_day": true,
+        "type": "gluxshop",
+        "source": "gluxshop",
+        "kind": "task",
+        "task_id": "a21NdW9qd0ZFUVROUWxZVQ",
+        "editable": false,
+        "google_url": "https://tasks.google.com"
+      },
+      {
+        "title": "CIB szamla megszuntetes",
+        "start": "2026-07-21",
+        "end": "2026-07-22",
+        "all_day": true,
+        "type": "gluxshop",
+        "source": "gluxshop",
+        "kind": "task",
+        "task_id": "UmFfVjRJMkZxYjhKUDVxbg",
+        "editable": false,
+        "google_url": "https://tasks.google.com"
+      },
+      {
+        "title": "bellis pos",
+        "start": "2026-07-21",
+        "end": "2026-07-22",
+        "all_day": true,
+        "type": "gluxshop",
+        "source": "gluxshop",
+        "kind": "calendar",
+        "event_id": "0373r4upk1vnabgiq2l857b0lk",
+        "calendar_id": "primary",
+        "editable": false,
+        "google_url": "https://www.google.com/calendar/event?eid=MDM3M3I0dXBrMXZuYWJnaXEybDg1N2IwbGsgaW5mb0BnbHV4c2hvcC5ldQ"
+      },
+      {
+        "title": "utalni",
+        "start": "2026-07-21",
+        "end": "2026-07-22",
+        "all_day": true,
+        "type": "gluxshop",
+        "source": "gluxshop",
+        "kind": "calendar",
+        "event_id": "0ovr4j945m310c4iuu214fm7c0",
+        "calendar_id": "primary",
+        "editable": false,
+        "google_url": "https://www.google.com/calendar/event?eid=MG92cjRqOTQ1bTMxMGM0aXV1MjE0Zm03YzAgaW5mb0BnbHV4c2hvcC5ldQ"
+      },
+      {
+        "title": "epr igazolás",
+        "start": "2026-07-21",
+        "end": "2026-07-22",
+        "all_day": true,
+        "type": "gluxshop",
+        "source": "gluxshop",
+        "kind": "calendar",
+        "event_id": "4mvr8vkihahab68koe2slp9egg",
+        "calendar_id": "primary",
+        "editable": false,
+        "google_url": "https://www.google.com/calendar/event?eid=NG12cjh2a2loYWhhYjY4a29lMnNscDllZ2cgaW5mb0BnbHV4c2hvcC5ldQ"
+      },
+      {
+        "title": "szállítülevél",
+        "start": "2026-07-21",
+        "end": "2026-07-22",
+        "all_day": true,
+        "type": "gluxshop",
+        "source": "gluxshop",
+        "kind": "calendar",
+        "event_id": "5ihtng1s2hqh3kp397u6dthnd0",
+        "calendar_id": "primary",
+        "editable": false,
+        "google_url": "https://www.google.com/calendar/event?eid=NWlodG5nMXMyaHFoM2twMzk3dTZkdGhuZDAgaW5mb0BnbHV4c2hvcC5ldQ"
+      },
+      {
+        "title": "feltölt",
+        "start": "2026-07-21",
+        "end": "2026-07-22",
+        "all_day": true,
+        "type": "gluxshop",
+        "source": "gluxshop",
+        "kind": "calendar",
+        "event_id": "5uv6cf9sj9g68s804kactjsan0",
+        "calendar_id": "primary",
+        "editable": false,
+        "google_url": "https://www.google.com/calendar/event?eid=NXV2NmNmOXNqOWc2OHM4MDRrYWN0anNhbjAgaW5mb0BnbHV4c2hvcC5ldQ"
+      },
+      {
+        "title": "számla",
+        "start": "2026-07-21",
+        "end": "2026-07-22",
+        "all_day": true,
+        "type": "gluxshop",
+        "source": "gluxshop",
+        "kind": "calendar",
+        "event_id": "6vd36ng65mgb1ne4vr42ec0rbo",
+        "calendar_id": "primary",
+        "editable": false,
+        "google_url": "https://www.google.com/calendar/event?eid=NnZkMzZuZzY1bWdiMW5lNHZyNDJlYzByYm8gaW5mb0BnbHV4c2hvcC5ldQ"
+      },
+      {
+        "title": "allianz utánajárás",
+        "start": "2026-07-21",
+        "end": "2026-07-22",
+        "all_day": true,
+        "type": "gluxshop",
+        "source": "gluxshop",
+        "kind": "calendar",
+        "event_id": "7dl440eihmi2blm7voh0o16cdc",
+        "calendar_id": "primary",
+        "editable": false,
+        "google_url": "https://www.google.com/calendar/event?eid=N2RsNDQwZWlobWkyYmxtN3ZvaDBvMTZjZGMgaW5mb0BnbHV4c2hvcC5ldQ"
+      },
+      {
+        "title": "everderm glux kontroll",
+        "start": "2026-07-21",
+        "end": "2026-07-22",
+        "all_day": true,
+        "type": "gluxshop",
+        "source": "gluxshop",
+        "kind": "calendar",
+        "event_id": "98tl7js9or702bq732dmhon1p8",
+        "calendar_id": "primary",
+        "editable": false,
+        "google_url": "https://www.google.com/calendar/event?eid=OTh0bDdqczlvcjcwMmJxNzMyZG1ob24xcDggaW5mb0BnbHV4c2hvcC5ldQ"
+      },
+      {
+        "title": "Pénzügy",
+        "start": "2026-07-21",
+        "end": "2026-07-22",
+        "all_day": true,
+        "type": "gluxshop",
+        "source": "gluxshop",
+        "kind": "calendar",
+        "event_id": "9mjc652upk7002d6fp2sm33vhc",
+        "calendar_id": "primary",
+        "editable": false,
+        "google_url": "https://www.google.com/calendar/event?eid=OW1qYzY1MnVwazcwMDJkNmZwMnNtMzN2aGMgaW5mb0BnbHV4c2hvcC5ldQ"
+      },
+      {
+        "title": "pos",
+        "start": "2026-07-21",
+        "end": "2026-07-22",
+        "all_day": true,
+        "type": "gluxshop",
+        "source": "gluxshop",
+        "kind": "calendar",
+        "event_id": "a7dg9qhk7qqpg99slseifro8b0",
+        "calendar_id": "primary",
+        "editable": false,
+        "google_url": "https://www.google.com/calendar/event?eid=YTdkZzlxaGs3cXFwZzk5c2xzZWlmcm84YjAgaW5mb0BnbHV4c2hvcC5ldQ"
+      },
+      {
+        "title": "bellis rendelés leadás",
+        "start": "2026-07-21",
+        "end": "2026-07-22",
+        "all_day": true,
+        "type": "gluxshop",
+        "source": "gluxshop",
+        "kind": "calendar",
+        "event_id": "c0irv8medqqggbol102c40g5j8",
+        "calendar_id": "primary",
+        "editable": false,
+        "google_url": "https://www.google.com/calendar/event?eid=YzBpcnY4bWVkcXFnZ2JvbDEwMmM0MGc1ajggaW5mb0BnbHV4c2hvcC5ldQ"
+      },
+      {
+        "title": "kredit",
+        "start": "2026-07-21",
+        "end": "2026-07-22",
+        "all_day": true,
+        "type": "gluxshop",
+        "source": "gluxshop",
+        "kind": "calendar",
+        "event_id": "dbnib1fdhll87vo7gbb7q01upo",
+        "calendar_id": "primary",
+        "editable": false,
+        "google_url": "https://www.google.com/calendar/event?eid=ZGJuaWIxZmRobGw4N3ZvN2diYjdxMDF1cG8gaW5mb0BnbHV4c2hvcC5ldQ"
+      },
+      {
+        "title": "csele számlák egyeztetés",
+        "start": "2026-07-21",
+        "end": "2026-07-22",
+        "all_day": true,
+        "type": "gluxshop",
+        "source": "gluxshop",
+        "kind": "calendar",
+        "event_id": "grclsde7hv9ldioa8ds4bo12bs",
+        "calendar_id": "primary",
+        "editable": false,
+        "google_url": "https://www.google.com/calendar/event?eid=Z3JjbHNkZTdodjlsZGlvYThkczRibzEyYnMgaW5mb0BnbHV4c2hvcC5ldQ"
+      },
+      {
+        "title": "levelek átnézés",
+        "start": "2026-07-21",
+        "end": "2026-07-22",
+        "all_day": true,
+        "type": "gluxshop",
+        "source": "gluxshop",
+        "kind": "calendar",
+        "event_id": "hv8ekjgr5einkgj4rtm6ti3ep4",
+        "calendar_id": "primary",
+        "editable": false,
+        "google_url": "https://www.google.com/calendar/event?eid=aHY4ZWtqZ3I1ZWlua2dqNHJ0bTZ0aTNlcDQgaW5mb0BnbHV4c2hvcC5ldQ"
+      },
+      {
+        "title": "b2b tagek csekkolás, felrakás",
+        "start": "2026-07-21",
+        "end": "2026-07-22",
+        "all_day": true,
+        "type": "gluxshop",
+        "source": "gluxshop",
+        "kind": "calendar",
+        "event_id": "l6ohedsuohl1bpn8ssjb5c1n34",
+        "calendar_id": "primary",
+        "editable": false,
+        "google_url": "https://www.google.com/calendar/event?eid=bDZvaGVkc3VvaGwxYnBuOHNzamI1YzFuMzQgaW5mb0BnbHV4c2hvcC5ldQ"
+      },
+      {
+        "title": "Garanciális ügyintézés",
+        "start": "2026-07-21",
+        "end": "2026-07-22",
+        "all_day": true,
+        "type": "gluxshop",
+        "source": "gluxshop",
+        "kind": "calendar",
+        "event_id": "nii98sd6dd5ai1a3id741ttnbc",
+        "calendar_id": "primary",
+        "editable": false,
+        "google_url": "https://www.google.com/calendar/event?eid=bmlpOThzZDZkZDVhaTFhM2lkNzQxdHRuYmMgaW5mb0BnbHV4c2hvcC5ldQ"
+      },
+      {
+        "title": "Pénzügy",
+        "start": "2026-07-21",
+        "end": "2026-07-22",
+        "all_day": true,
+        "type": "gluxshop",
+        "source": "gluxshop",
+        "kind": "calendar",
+        "event_id": "so92pb8m9ab0pmbp99v63pibog",
+        "calendar_id": "primary",
+        "editable": false,
+        "google_url": "https://www.google.com/calendar/event?eid=c285MnBiOG05YWIwcG1icDk5djYzcGlib2cgaW5mb0BnbHV4c2hvcC5ldQ"
+      },
+      {
+        "title": "utalnivalók",
+        "start": "2026-07-21",
+        "end": "2026-07-22",
+        "all_day": true,
+        "type": "gluxshop",
+        "source": "gluxshop",
+        "kind": "calendar",
+        "event_id": "t5deahb7ua9tb1sk87466qid10",
+        "calendar_id": "primary",
+        "editable": false,
+        "google_url": "https://www.google.com/calendar/event?eid=dDVkZWFoYjd1YTl0YjFzazg3NDY2cWlkMTAgaW5mb0BnbHV4c2hvcC5ldQ"
+      },
+      {
+        "title": "brando társasági adó utalás",
+        "start": "2026-07-21",
+        "end": "2026-07-22",
+        "all_day": true,
+        "type": "gluxshop",
+        "source": "gluxshop",
+        "kind": "calendar",
+        "event_id": "tvat144odfqqbijcsiad04k5jk",
+        "calendar_id": "primary",
+        "editable": false,
+        "google_url": "https://www.google.com/calendar/event?eid=dHZhdDE0NG9kZnFxYmlqY3NpYWQwNGs1amsgaW5mb0BnbHV4c2hvcC5ldQ"
+      },
+      {
+        "title": "utalni",
+        "start": "2026-07-21",
+        "end": "2026-07-22",
+        "all_day": true,
+        "type": "gluxshop",
+        "source": "gluxshop",
+        "kind": "calendar",
+        "event_id": "uq62runvkna3rhf4j7iups8v24",
+        "calendar_id": "primary",
+        "editable": false,
+        "google_url": "https://www.google.com/calendar/event?eid=dXE2MnJ1bnZrbmEzcmhmNGo3aXVwczh2MjQgaW5mb0BnbHV4c2hvcC5ldQ"
+      },
+      {
+        "title": "Garanciális ügyintézés",
+        "start": "2026-07-21",
+        "end": "2026-07-22",
+        "all_day": true,
+        "type": "gluxshop",
+        "source": "gluxshop",
+        "kind": "calendar",
+        "event_id": "vf6jahrt4j6abppd4o19acbcco",
+        "calendar_id": "primary",
+        "editable": false,
+        "google_url": "https://www.google.com/calendar/event?eid=dmY2amFocnQ0ajZhYnBwZDRvMTlhY2JjY28gaW5mb0BnbHV4c2hvcC5ldQ"
       }
     ]
   },
@@ -147,39 +494,179 @@
   ],
   "tasks": {
     "personal": [
-      {"title": "[email] Görög marketinges levél átnézése (Dóri / Pipedrive)", "priority": "medium", "due": null, "task_id": "XzZiUk5EejNlMWYzMFV1SA", "task_list_id": "@default", "editable": true, "google_url": "https://tasks.google.com/task/XzZiUk5EejNlMWYzMFV1SA"},
-      {"title": "[email] Nők Lapja Egészség — Gluxshop megjelenés ajánlat", "priority": "low", "due": "2026-08-05", "task_id": "SjNJbXBiaDFtNmhmZnRndg", "task_list_id": "@default", "editable": true, "google_url": "https://tasks.google.com/task/SjNJbXBiaDFtNmhmZnRndg"},
-      {"title": "Grenton hivni", "priority": "medium", "due": "2026-07-23", "task_id": "aDJic29uX2JPZG5CUnBWMw", "task_list_id": "@default", "editable": true, "google_url": "https://tasks.google.com/task/aDJic29uX2JPZG5CUnBWMw"},
-      {"title": "[pipedrive] görög videók — átnézés (Dóri)", "priority": "medium", "due": null, "task_id": "NEtZSUxjbUlLVGx5UVViZQ", "task_list_id": "@default", "editable": true, "google_url": "https://tasks.google.com/task/NEtZSUxjbUlLVGx5UVViZQ"},
-      {"title": "[pipedrive] Shopify B2B ellenőrzés és indítás (Dóri)", "priority": "medium", "due": null, "task_id": "b0t2U3BBcG5INS1nRVZIUg", "task_list_id": "@default", "editable": true, "google_url": "https://tasks.google.com/task/b0t2U3BBcG5INS1nRVZIUg"},
-      {"title": "[pipedrive] NAYAX telefonszám változás (Dóri)", "priority": "low", "due": null, "task_id": "Ym1zVmptNkdnbFJuVUF2ZA", "task_list_id": "@default", "editable": true, "google_url": "https://tasks.google.com/task/Ym1zVmptNkdnbFJuVUF2ZA"},
-      {"title": "[pipedrive] Kontakt feltöltése B2B partnerkereséshez (Dóri)", "priority": "low", "due": null, "task_id": "WGxsSWR1dC1xdGY4encyaQ", "task_list_id": "@default", "editable": true, "google_url": "https://tasks.google.com/task/WGxsSWR1dC1xdGY4encyaQ"},
-      {"title": "[pipedrive] NAV automata ügyfélkapu — Hívás (Dóri)", "priority": "low", "due": null, "task_id": "NUprSDhXYUtIZG9RbWVSbg", "task_list_id": "@default", "editable": true, "google_url": "https://tasks.google.com/task/NUprSDhXYUtIZG9RbWVSbg"},
-      {"title": "[pipedrive] duna pláza automata átvitel (Dóri)", "priority": "low", "due": null, "task_id": "YVFRTjFIVTZOdVlBYjVkaQ", "task_list_id": "@default", "editable": true, "google_url": "https://tasks.google.com/task/YVFRTjFIVTZOdVlBYjVkaQ"}
+      {
+        "title": "[email] Görög marketinges levél átnézése (Dóri / Pipedrive)",
+        "priority": "medium",
+        "due": null,
+        "task_id": "XzZiUk5EejNlMWYzMFV1SA",
+        "task_list_id": "@default",
+        "editable": true,
+        "google_url": "https://tasks.google.com/task/XzZiUk5EejNlMWYzMFV1SA"
+      },
+      {
+        "title": "[email] Nők Lapja Egészség — Gluxshop megjelenés ajánlat",
+        "priority": "low",
+        "due": "2026-08-05",
+        "task_id": "SjNJbXBiaDFtNmhmZnRndg",
+        "task_list_id": "@default",
+        "editable": true,
+        "google_url": "https://tasks.google.com/task/SjNJbXBiaDFtNmhmZnRndg"
+      },
+      {
+        "title": "Grenton hivni",
+        "priority": "medium",
+        "due": "2026-07-23",
+        "task_id": "aDJic29uX2JPZG5CUnBWMw",
+        "task_list_id": "@default",
+        "editable": true,
+        "google_url": "https://tasks.google.com/task/aDJic29uX2JPZG5CUnBWMw"
+      },
+      {
+        "title": "[pipedrive] görög videók — átnézés (Dóri)",
+        "priority": "medium",
+        "due": null,
+        "task_id": "NEtZSUxjbUlLVGx5UVViZQ",
+        "task_list_id": "@default",
+        "editable": true,
+        "google_url": "https://tasks.google.com/task/NEtZSUxjbUlLVGx5UVViZQ"
+      },
+      {
+        "title": "[pipedrive] Shopify B2B ellenőrzés és indítás (Dóri)",
+        "priority": "medium",
+        "due": null,
+        "task_id": "b0t2U3BBcG5INS1nRVZIUg",
+        "task_list_id": "@default",
+        "editable": true,
+        "google_url": "https://tasks.google.com/task/b0t2U3BBcG5INS1nRVZIUg"
+      },
+      {
+        "title": "[pipedrive] NAYAX telefonszám változás (Dóri)",
+        "priority": "low",
+        "due": null,
+        "task_id": "Ym1zVmptNkdnbFJuVUF2ZA",
+        "task_list_id": "@default",
+        "editable": true,
+        "google_url": "https://tasks.google.com/task/Ym1zVmptNkdnbFJuVUF2ZA"
+      },
+      {
+        "title": "[pipedrive] Kontakt feltöltése B2B partnerkereséshez (Dóri)",
+        "priority": "low",
+        "due": null,
+        "task_id": "WGxsSWR1dC1xdGY4encyaQ",
+        "task_list_id": "@default",
+        "editable": true,
+        "google_url": "https://tasks.google.com/task/WGxsSWR1dC1xdGY4encyaQ"
+      },
+      {
+        "title": "[pipedrive] NAV automata ügyfélkapu — Hívás (Dóri)",
+        "priority": "low",
+        "due": null,
+        "task_id": "NUprSDhXYUtIZG9RbWVSbg",
+        "task_list_id": "@default",
+        "editable": true,
+        "google_url": "https://tasks.google.com/task/NUprSDhXYUtIZG9RbWVSbg"
+      },
+      {
+        "title": "[pipedrive] duna pláza automata átvitel (Dóri)",
+        "priority": "low",
+        "due": null,
+        "task_id": "YVFRTjFIVTZOdVlBYjVkaQ",
+        "task_list_id": "@default",
+        "editable": true,
+        "google_url": "https://tasks.google.com/task/YVFRTjFIVTZOdVlBYjVkaQ"
+      }
     ],
     "gluxshop": [
-      {"title": "Slack gergo", "priority": "high", "due": "2026-07-21", "task_id": "d0F5UkVHX0c4V0ItTUJsRA", "editable": false, "account": "info@gluxshop.eu", "google_url": "https://tasks.google.com"},
-      {"title": "Garancia api", "priority": "high", "due": "2026-07-21", "task_id": "UjlaYURoSUVSMm5sN1FzaQ", "editable": false, "account": "info@gluxshop.eu", "google_url": "https://tasks.google.com"},
-      {"title": "Lcdfix+glux Cursor", "priority": "high", "due": "2026-07-21", "task_id": "RTlCM0pSbWpSRnhQSWQ5VA", "editable": false, "account": "info@gluxshop.eu", "google_url": "https://tasks.google.com"},
-      {"title": "Elina rendeles+ api", "priority": "high", "due": "2026-07-21", "task_id": "a21NdW9qd0ZFUVROUWxZVQ", "editable": false, "account": "info@gluxshop.eu", "google_url": "https://tasks.google.com"},
-      {"title": "CIB szamla megszuntetes", "priority": "high", "due": "2026-07-21", "task_id": "UmFfVjRJMkZxYjhKUDVxbg", "editable": false, "account": "info@gluxshop.eu", "google_url": "https://tasks.google.com"}
+      {
+        "title": "Slack gergo",
+        "priority": "high",
+        "due": "2026-07-21",
+        "task_id": "d0F5UkVHX0c4V0ItTUJsRA",
+        "editable": false,
+        "account": "info@gluxshop.eu",
+        "google_url": "https://tasks.google.com"
+      },
+      {
+        "title": "Garancia api",
+        "priority": "high",
+        "due": "2026-07-21",
+        "task_id": "UjlaYURoSUVSMm5sN1FzaQ",
+        "editable": false,
+        "account": "info@gluxshop.eu",
+        "google_url": "https://tasks.google.com"
+      },
+      {
+        "title": "Lcdfix+glux Cursor",
+        "priority": "high",
+        "due": "2026-07-21",
+        "task_id": "RTlCM0pSbWpSRnhQSWQ5VA",
+        "editable": false,
+        "account": "info@gluxshop.eu",
+        "google_url": "https://tasks.google.com"
+      },
+      {
+        "title": "Elina rendeles+ api",
+        "priority": "high",
+        "due": "2026-07-21",
+        "task_id": "a21NdW9qd0ZFUVROUWxZVQ",
+        "editable": false,
+        "account": "info@gluxshop.eu",
+        "google_url": "https://tasks.google.com"
+      },
+      {
+        "title": "CIB szamla megszuntetes",
+        "priority": "high",
+        "due": "2026-07-21",
+        "task_id": "UmFfVjRJMkZxYjhKUDVxbg",
+        "editable": false,
+        "account": "info@gluxshop.eu",
+        "google_url": "https://tasks.google.com"
+      }
     ],
     "skipped": [
-      {"title": "Bellis e-számla — könyvelés", "reason": "Dóri"},
-      {"title": "Macbook / LCDFIX szerviz", "reason": "LCDFIX team"}
+      {
+        "title": "Bellis e-számla — könyvelés",
+        "reason": "Dóri"
+      },
+      {
+        "title": "Macbook / LCDFIX szerviz",
+        "reason": "LCDFIX team"
+      }
     ]
   },
   "warnings": [
+    "Gluxshop: 46 egésznapos naptáresemény ma — e-mail/Support zaj kiszűrve, actionable + Tasks due ma látszik",
     "16:00–17:00 Allee meet — előtte buffer",
     "Bellis + Macbook kivéve (Dóri / LCDFIX)",
     "Pipedrive: csak Hristos owner_id=31088152",
-    "Gluxshop kipipálás: más fiók — nyisd meg Google Tasks-ben (info@gluxshop.eu)"
+    "Gluxshop kipipálás: más fiók — nyisd meg Google Tasks-ben (info@gluxshop.eu)",
+    "Holnap 5 Pipedrive blokk = határidő nélküli backlog — user megerősítés kell törléshez",
+    "Grenton csütörtök 10:00 (due 07-23)"
   ],
   "stats": {
     "open_personal": 9,
     "open_gluxshop": 5,
     "scheduled_today": 4,
-    "scheduled_tomorrow": 6,
-    "conflicts": 0
+    "scheduled_tomorrow": 5,
+    "scheduled_thursday": 1,
+    "conflicts": 0,
+    "all_day_today": 26,
+    "all_day_raw_gluxshop": 46,
+    "all_day_noise_filtered": 25
+  },
+  "stale_review": {
+    "note": "Pipedrive MCP unavailable 2026-07-21 15:30 — Google Tasks still needsAction, no due dates. Not auto-deleted.",
+    "likely_older_backlog": [
+      "NAV #1546",
+      "B2B kontakt #2593",
+      "NAYAX #2640"
+    ],
+    "possibly_newer": [
+      "Shopify B2B #3510",
+      "Duna pláza #3507"
+    ],
+    "current": [
+      "Grenton due 2026-07-23"
+    ]
   }
 }

@@ -275,6 +275,50 @@ function renderTimeline(el, events, dayKey) {
     .join('');
 }
 
+/** All-day / egésznapos — no shift controls; Google link + source badge */
+function renderAllDay(el, events) {
+  const section = document.getElementById('section-all-day');
+  const hint = document.getElementById('all-day-hint');
+  if (!el) return;
+  if (!events?.length) {
+    if (section) section.hidden = true;
+    el.innerHTML = '';
+    return;
+  }
+  if (section) section.hidden = false;
+  const tasks = events.filter((e) => e.kind === 'task').length;
+  const cal = events.filter((e) => e.kind !== 'task').length;
+  if (hint) {
+    const parts = [];
+    if (tasks) parts.push(`${tasks} task`);
+    if (cal) parts.push(`${cal} naptár`);
+    const raw = state.data?.stats?.all_day_raw_gluxshop;
+    hint.textContent = parts.length
+      ? `(${parts.join(' · ')}${raw ? ` · ${raw} nyers` : ''})`
+      : '';
+  }
+  el.innerHTML = events
+    .map((e) => {
+      const google = e.google_url
+        ? `<a class="mini-link" href="${escapeHtml(e.google_url)}" target="_blank" rel="noopener">Google</a>`
+        : '';
+      const source = e.source
+        ? `<span class="source-tag">${escapeHtml(e.source)}</span>`
+        : '';
+      const kind = e.kind === 'task' ? '<span class="source-tag kind">task</span>' : '';
+      return `
+      <div class="event all-day ${escapeHtml(e.type || '')}" data-event-id="${escapeHtml(e.event_id || '')}">
+        <div class="event-time">egész nap</div>
+        <div class="event-body">
+          <div class="event-title">${escapeHtml(e.title)} ${source} ${kind}</div>
+          ${e.location ? `<div class="event-loc">${escapeHtml(e.location)}</div>` : ''}
+          <div class="event-controls">${google}</div>
+        </div>
+      </div>`;
+    })
+    .join('');
+}
+
 function renderTasks(el, items, bucket) {
   if (!items?.length) {
     el.innerHTML = '<li>Nincs nyitott feladat.</li>';
@@ -325,13 +369,29 @@ function renderAll() {
   if (!data) return;
   document.getElementById('updated').textContent =
     `Frissítve: ${new Date(data.generated_at).toLocaleString('hu-HU')}`;
+  renderAllDay(document.getElementById('timeline-all-day'), data.calendar?.all_day);
   renderTimeline(document.getElementById('timeline-today'), data.calendar?.today, 'today');
   renderTimeline(document.getElementById('timeline-tomorrow'), data.calendar?.tomorrow, 'tomorrow');
+  const thuEl = document.getElementById('timeline-thursday');
+  const thuSection = document.getElementById('section-thursday');
+  if (thuEl) {
+    const thu = data.calendar?.thursday || [];
+    if (thuSection) thuSection.hidden = !thu.length;
+    if (thu.length) renderTimeline(thuEl, thu, 'thursday');
+  }
   renderList(document.getElementById('free-slots'), data.free_slots);
   renderList(document.getElementById('warnings'), data.warnings, 'Minden rendben.');
   renderTasks(document.getElementById('tasks-personal'), data.tasks?.personal, 'personal');
   renderTasks(document.getElementById('tasks-gluxshop'), data.tasks?.gluxshop, 'gluxshop');
   updateAuthUi();
+}
+
+async function syncCalendarGone(task) {
+  const linked = findLinkedEventForTask(task);
+  if (!linked?.event_id) return false;
+  await deleteCalendarEvent(linked);
+  removeEventFromState(linked.event_id);
+  return true;
 }
 
 async function onCompleteTask(bucket, taskId, checkbox) {
@@ -347,12 +407,56 @@ async function onCompleteTask(bucket, taskId, checkbox) {
   task._completed = true;
   try {
     await completeTask(task);
-    toast('Kész — Tasks-ben kipipálva.', 'ok');
+    let calNote = '';
+    try {
+      const removed = await syncCalendarGone(task);
+      if (removed) calNote = ' + naptár törölve';
+    } catch (calErr) {
+      calNote = ` (naptár: ${calErr.message})`;
+    }
+    toast(`Kész — Tasks kipipálva${calNote}.`, 'ok');
+    renderAll();
   } catch (err) {
     task._completed = false;
     li?.classList.remove('done');
     checkbox.checked = false;
     toast(`Nem sikerült: ${err.message}`, 'error');
+  }
+}
+
+async function onDeleteTask(bucket, taskId) {
+  const task = findTask(bucket, taskId);
+  if (!task) return;
+  if (task.editable === false) {
+    toast('Gluxshop task: más Google-fiók — nyisd meg Google-ben.', 'error');
+    return;
+  }
+  if (!window.confirm(`Törlöd?\n${task.title}\n\nGoogle Tasks + kapcsolódó Kairos naptáresemény.`)) {
+    return;
+  }
+  task._deleted = true;
+  renderAll();
+  try {
+    try {
+      await deleteTaskApi(task);
+    } catch (delErr) {
+      // Fallback: complete if delete denied
+      await completeTask(task);
+    }
+    let calNote = '';
+    try {
+      const removed = await syncCalendarGone(task);
+      if (removed) calNote = ' + naptár';
+    } catch (calErr) {
+      calNote = ` (naptár hiba: ${calErr.message})`;
+    }
+    removeTaskFromState(bucket, taskId);
+    renderAll();
+    toast(`Törölve — Tasks${calNote}.`, 'ok');
+  } catch (err) {
+    task._deleted = false;
+    renderAll();
+    toast(`Törlés sikertelen: ${err.message}`, 'error');
   }
 }
 
@@ -436,9 +540,10 @@ function bindUi() {
   document.body.addEventListener('click', (ev) => {
     const btn = ev.target.closest('[data-action]');
     if (!btn) return;
-    const { action, day, id, delta } = btn.dataset;
+    const { action, day, id, delta, bucket } = btn.dataset;
     if (action === 'shift') onShiftEvent(day, id, Number(delta));
     if (action === 'set-time') onSetEventTime(day, id);
+    if (action === 'delete-task') onDeleteTask(bucket, id);
   });
 }
 
