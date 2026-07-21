@@ -452,5 +452,60 @@
         "reason": "LCDFIX / Dóri könyvelés"
       }
     ]
+  },
+  "profit": {
+    "status": "ok",
+    "currency": "HUF",
+    "as_of": "2026-07-21",
+    "repairdesk": {
+      "status": "ok",
+      "basis": "cash",
+      "note": "Üzletenkénti API kulcs (locations → api_key). Befizetés összeg + számla dátum.",
+      "locations": [
+        "Allee",
+        "Etele",
+        "Duna"
+      ],
+      "today": {
+        "total": 1428890.0,
+        "by_store": {
+          "Allee": 1185290.0,
+          "Etele": 127000.0,
+          "Duna": 116600.0
+        }
+      },
+      "month_to_date": {
+        "total": 31090100.04,
+        "by_store": {
+          "Allee": 21983710.04,
+          "Etele": 5040500.0,
+          "Duna": 4065890.0
+        }
+      },
+      "invoice_count": 1488
+    },
+    "shopify": {
+      "status": "ok",
+      "currency": "HUF",
+      "source": "shopifyql",
+      "as_of": "2026-07-21",
+      "today": {
+        "revenue": 6954813.94,
+        "total_sales": 7326432.0,
+        "gross_sales": 9256689.07,
+        "cogs": 2428000.0,
+        "profit": 4493136.94,
+        "orders": 74
+      },
+      "month_to_date": {
+        "revenue": 53041340.02,
+        "total_sales": 57157937.22,
+        "gross_sales": 59300108.61,
+        "cogs": 16594000.0,
+        "profit": 35951682.13,
+        "orders": 1236
+      },
+      "note": "ShopifyQL FROM sales (Admin API). Bevétel = net_sales, COGS = cost_of_goods_sold, Profit = gross_profit."
+    }
   }
 }

@@ -45,8 +45,23 @@ Saját Client ID: írd a `config.js` → `clientId` mezőbe, vagy `?client_id=..
 | `index.html` / `style.css` / `app.js` | UI + API hívások |
 | `config.js` | Client ID, calendar ID, scope |
 | `data/latest.json` | Snapshot (`event_id`, `task_id` mezőkkel) |
+| `scripts/sync_profit.py` | RepairDesk bevétel → `profit` blokk a JSON-ban |
+| `scripts/repairdesk_revenue.py` | RepairDesk API kliens (készpénz alap) |
 
 Forrás sync: `/Users/hristos/Projects/hristos-private/kairos/dashboard/`
+
+## Profit blokk (RepairDesk)
+
+Esti sync (Cursor agent vagy helyben):
+
+```bash
+python3 scripts/sync_profit.py
+git add data/latest.json && git commit -m "profit sync" && git push
+```
+
+Secrets (team env): `repairdesk_api` (API kulcs), opcionálisan `repairdesk-login` / `repairdesk-password`.
+
+Ha **401**: auth legyen `Authorization: Bearer <key>` (ne query `api_key`).
 
 ## Helyi előnézet
 

@@ -52,6 +52,73 @@ h2 .hint {
   margin-left: 0.35rem;
 }
 
+.profit-panel { display: flex; flex-direction: column; gap: 1rem; }
+.profit-kpis {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 0.75rem;
+}
+.profit-kpi {
+  background: #121a26;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 0.85rem 1rem;
+}
+.profit-kpi .label {
+  display: block;
+  color: var(--muted);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.profit-kpi .value {
+  display: block;
+  font-size: 1.35rem;
+  font-weight: 600;
+  margin-top: 0.25rem;
+}
+.profit-kpi .value.small { font-size: 0.95rem; font-weight: 500; }
+.profit-kpi.muted .value { color: var(--muted); }
+.profit-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+.profit-table th,
+.profit-table td {
+  padding: 0.45rem 0.5rem;
+  border-bottom: 1px solid var(--border);
+  text-align: left;
+}
+.profit-table .num { text-align: right; font-variant-numeric: tabular-nums; }
+.profit-muted { color: var(--muted); font-size: 0.82rem; margin: 0; }
+.profit-error {
+  color: var(--high);
+  background: rgba(255, 107, 107, 0.08);
+  border: 1px solid rgba(255, 107, 107, 0.25);
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+}
+.profit-loading { color: var(--muted); margin: 0; }
+
+.profit-h3 {
+  margin: 0 0 0.75rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text);
+}
+.profit-h3 + .profit-kpis { margin-bottom: 0.5rem; }
+.profit-kpi--green .value { color: var(--glux); }
+.profit-warning {
+  color: var(--medium);
+  font-size: 0.82rem;
+  margin: 0.5rem 0 0;
+  padding: 0.5rem 0.75rem;
+  background: rgba(240, 192, 64, 0.08);
+  border: 1px solid rgba(240, 192, 64, 0.25);
+  border-radius: 6px;
+}
+
 .meta {
   display: flex;
   flex-wrap: wrap;

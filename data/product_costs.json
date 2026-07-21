@@ -1,0 +1,12 @@
+{
+  "_comment": "Termék költség (COGS) SKU-nként. Shopify MCP nem adja vissza a cost mezőt, ezért itt kézzel kell vezetni. Csak a profit számolásához kell.",
+  "_cost_unit": "HUF",
+  "_updated": "2026-07-21",
+  "products": [
+    {
+      "sku": "6958590309093",
+      "title": "LinX / Glux CGM szenzor",
+      "cost": 0
+    }
+  ]
+}
