@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Kairos — ma</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="header">
+    <div>
+      <p class="eyebrow">Kairos</p>
+      <h1>Személyi asszisztens</h1>
+    </div>
+    <div class="meta">
+      <span id="updated">Betöltés…</span>
+      <a class="btn" href="https://calendar.google.com" target="_blank" rel="noopener">Naptár</a>
+      <a class="btn" href="https://tasks.google.com" target="_blank" rel="noopener">Tasks</a>
+    </div>
+  </header>
+
+  <main class="grid">
+    <section class="card span-2">
+      <h2>Ma — idővonal</h2>
+      <div class="timeline" id="timeline-today"></div>
+    </section>
+
+    <section class="card span-2">
+      <h2>Holnap</h2>
+      <div class="timeline" id="timeline-tomorrow"></div>
+    </section>
+
+    <section class="card">
+      <h2>Szabad rések</h2>
+      <ul class="list" id="free-slots"></ul>
+    </section>
+
+    <section class="card">
+      <h2>Figyelmeztetések</h2>
+      <ul class="list warnings" id="warnings"></ul>
+    </section>
+
+    <section class="card">
+      <h2>Személyes teendők</h2>
+      <ul class="list tasks" id="tasks-personal"></ul>
+    </section>
+
+    <section class="card">
+      <h2>Gluxshop teendők</h2>
+      <ul class="list tasks" id="tasks-gluxshop"></ul>
+    </section>
+  </main>
+
+  <footer class="footer">
+    Adat: <code>data/latest.json</code> — frissítés: „kairos sync” a Cursor chatben
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

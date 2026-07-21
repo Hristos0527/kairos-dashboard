@@ -1,0 +1,129 @@
+{
+  "generated_at": "2026-07-21T14:55:00+02:00",
+  "schedule_date": "2026-07-21",
+  "account": "hristos.lcdfix@gmail.com",
+  "calendar": {
+    "today": [
+      {
+        "title": "[Kairos] Görög marketinges levél",
+        "start": "2026-07-21T15:35:00+02:00",
+        "end": "2026-07-21T15:50:00+02:00",
+        "location": "Otthon / iroda",
+        "type": "kairos"
+      },
+      {
+        "title": "Allee meet",
+        "start": "2026-07-21T16:00:00+02:00",
+        "end": "2026-07-21T17:00:00+02:00",
+        "location": "Allee",
+        "type": "meeting"
+      },
+      {
+        "title": "[Kairos] Gluxshop mai tasks blokk",
+        "start": "2026-07-21T17:15:00+02:00",
+        "end": "2026-07-21T17:45:00+02:00",
+        "location": "Otthon / iroda",
+        "type": "kairos"
+      },
+      {
+        "title": "[Kairos] Görög videók átnézése",
+        "start": "2026-07-21T17:50:00+02:00",
+        "end": "2026-07-21T18:15:00+02:00",
+        "location": "Otthon / iroda",
+        "type": "kairos"
+      }
+    ],
+    "tomorrow": [
+      {
+        "title": "[Kairos] Grenton hívni — jön-e este villanyszerelő?",
+        "start": "2026-07-22T10:00:00+02:00",
+        "end": "2026-07-22T10:01:00+02:00",
+        "location": "Telefon",
+        "type": "kairos"
+      },
+      {
+        "title": "[Kairos] NAYAX telefonszám változás",
+        "start": "2026-07-22T10:20:00+02:00",
+        "end": "2026-07-22T10:50:00+02:00",
+        "location": "Online",
+        "type": "pipedrive"
+      },
+      {
+        "title": "[Kairos] Shopify B2B ellenőrzés",
+        "start": "2026-07-22T10:30:00+02:00",
+        "end": "2026-07-22T11:00:00+02:00",
+        "location": "Online",
+        "type": "pipedrive"
+      },
+      {
+        "title": "[Kairos] Duna pláza automata átvitel",
+        "start": "2026-07-22T11:00:00+02:00",
+        "end": "2026-07-22T11:30:00+02:00",
+        "location": "Online",
+        "type": "pipedrive"
+      },
+      {
+        "title": "[Kairos] B2B kontakt feltöltés",
+        "start": "2026-07-22T13:30:00+02:00",
+        "end": "2026-07-22T14:00:00+02:00",
+        "location": "Online",
+        "type": "pipedrive"
+      },
+      {
+        "title": "[Kairos] NAV ügyfélkapu — Hívás",
+        "start": "2026-07-22T14:00:00+02:00",
+        "end": "2026-07-22T14:30:00+02:00",
+        "location": "Telefon",
+        "type": "pipedrive"
+      }
+    ]
+  },
+  "free_slots": [
+    {
+      "start": "2026-07-21T14:55:00+02:00",
+      "end": "2026-07-21T15:55:00+02:00",
+      "label": "Ma délután — Allee előtt"
+    },
+    {
+      "start": "2026-07-21T17:15:00+02:00",
+      "end": "2026-07-21T20:30:00+02:00",
+      "label": "Ma este — Allee után"
+    }
+  ],
+  "tasks": {
+    "personal": [
+      {"title": "[email] Görög marketinges levél átnézése", "priority": "medium", "due": null},
+      {"title": "[email] Nők Lapja Egészség — Gluxshop megjelenés ajánlat", "priority": "low", "due": "2026-08-05"},
+      {"title": "Grenton hivni", "priority": "medium", "due": "2026-07-23"},
+      {"title": "[pipedrive] görög videók — átnézés", "priority": "medium", "due": null},
+      {"title": "[pipedrive] Shopify B2B ellenőrzés és indítás", "priority": "medium", "due": null},
+      {"title": "[pipedrive] NAYAX telefonszám változás", "priority": "low", "due": null},
+      {"title": "[pipedrive] Kontakt feltöltése B2B partnerkereséshez", "priority": "low", "due": null},
+      {"title": "[pipedrive] NAV automata ügyfélkapu — Hívás", "priority": "low", "due": null},
+      {"title": "[pipedrive] duna pláza automata átvitel", "priority": "low", "due": null}
+    ],
+    "gluxshop": [
+      {"title": "Slack gergo", "priority": "high", "due": "2026-07-21"},
+      {"title": "Garancia api", "priority": "high", "due": "2026-07-21"},
+      {"title": "Lcdfix+glux Cursor", "priority": "high", "due": "2026-07-21"},
+      {"title": "Elina rendeles+ api", "priority": "high", "due": "2026-07-21"},
+      {"title": "CIB szamla megszuntetes", "priority": "high", "due": "2026-07-21"}
+    ],
+    "skipped": [
+      {"title": "Bellis e-számla — könyvelés", "reason": "Dóri"},
+      {"title": "Macbook / LCDFIX szerviz", "reason": "LCDFIX team"}
+    ]
+  },
+  "warnings": [
+    "16:00–17:00 Allee meet — előtte buffer",
+    "Bellis + Macbook kivéve (Dóri / LCDFIX)",
+    "Pipedrive: csak Hristos owner_id=31088152"
+  ],
+  "stats": {
+    "open_personal": 9,
+    "open_gluxshop": 5,
+    "scheduled_today": 4,
+    "scheduled_tomorrow": 6,
+    "conflicts": 0
+  }
+}
