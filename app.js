@@ -72,13 +72,33 @@ function toast(msg, kind = 'info') {
   }, 4200);
 }
 
+function tokenStore() {
+  // Persist across tab/browser close (same device). Token still expires ~1h;
+  // GIS can re-prompt silently if Google session is alive.
+  return localStorage;
+}
+
 function loadStoredToken() {
-  const token = sessionStorage.getItem(TOKEN_KEY);
-  const exp = Number(sessionStorage.getItem(TOKEN_EXP_KEY) || 0);
+  const store = tokenStore();
+  const token = store.getItem(TOKEN_KEY);
+  const exp = Number(store.getItem(TOKEN_EXP_KEY) || 0);
   if (token && exp > Date.now() + 30_000) {
     state.token = token;
     return true;
   }
+  // Migrate old sessionStorage tokens if any
+  const legacy = sessionStorage.getItem(TOKEN_KEY);
+  const legacyExp = Number(sessionStorage.getItem(TOKEN_EXP_KEY) || 0);
+  if (legacy && legacyExp > Date.now() + 30_000) {
+    store.setItem(TOKEN_KEY, legacy);
+    store.setItem(TOKEN_EXP_KEY, String(legacyExp));
+    sessionStorage.removeItem(TOKEN_KEY);
+    sessionStorage.removeItem(TOKEN_EXP_KEY);
+    state.token = legacy;
+    return true;
+  }
+  store.removeItem(TOKEN_KEY);
+  store.removeItem(TOKEN_EXP_KEY);
   sessionStorage.removeItem(TOKEN_KEY);
   sessionStorage.removeItem(TOKEN_EXP_KEY);
   state.token = null;
@@ -87,12 +107,18 @@ function loadStoredToken() {
 
 function storeToken(accessToken, expiresInSec = 3600) {
   state.token = accessToken;
-  sessionStorage.setItem(TOKEN_KEY, accessToken);
-  sessionStorage.setItem(TOKEN_EXP_KEY, String(Date.now() + expiresInSec * 1000));
+  const store = tokenStore();
+  store.setItem(TOKEN_KEY, accessToken);
+  store.setItem(TOKEN_EXP_KEY, String(Date.now() + expiresInSec * 1000));
+  store.setItem(TOKEN_KEY + '_seen', '1');
+  sessionStorage.removeItem(TOKEN_KEY);
+  sessionStorage.removeItem(TOKEN_EXP_KEY);
 }
 
 function clearToken() {
   state.token = null;
+  tokenStore().removeItem(TOKEN_KEY);
+  tokenStore().removeItem(TOKEN_EXP_KEY);
   sessionStorage.removeItem(TOKEN_KEY);
   sessionStorage.removeItem(TOKEN_EXP_KEY);
 }
@@ -180,8 +206,13 @@ function requestAuth(prompt) {
 
 async function ensureAuth() {
   if (isAuthed()) return state.token;
-  toast('Google belépés szükséges…');
-  return requestAuth('consent');
+  // Prefer silent refresh (empty prompt) if Google session still alive
+  try {
+    return await requestAuth('');
+  } catch {
+    toast('Google belépés szükséges…');
+    return requestAuth('consent');
+  }
 }
 
 async function apiFetch(url, options = {}) {
@@ -347,6 +378,11 @@ function renderTimeline(el, events, dayKey) {
     .map((e) => {
       const editable = e.editable !== false && e.event_id;
       const links = sourceLinksHtml(e);
+      const canCheck = Boolean(e.task_id) && isAuthed();
+      const done = e._completed || findTask('personal', e.task_id)?._completed;
+      const check = e.task_id
+        ? `<input type="checkbox" class="event-check" data-day="${dayKey}" data-event-id="${escapeHtml(e.event_id || '')}" data-task-id="${escapeHtml(e.task_id)}" ${done ? 'checked' : ''} ${canCheck ? '' : 'disabled'} title="${isAuthed() ? 'Kész — Tasks + naptár' : 'Google belépés kell'}" />`
+        : '';
       const controls = editable
         ? `<div class="event-controls">
             <button type="button" class="chip" data-action="shift" data-day="${dayKey}" data-id="${escapeHtml(e.event_id)}" data-delta="-15" ${isAuthed() ? '' : 'disabled'} title="15 perccel korábbra">−15p</button>
@@ -357,10 +393,13 @@ function renderTimeline(el, events, dayKey) {
           </div>`
         : `<div class="event-controls">${links}</div>`;
       return `
-      <div class="event ${escapeHtml(e.type || '')}" data-event-id="${escapeHtml(e.event_id || '')}">
+      <div class="event ${escapeHtml(e.type || '')}${done ? ' done' : ''}" data-event-id="${escapeHtml(e.event_id || '')}">
         <div class="event-time">${fmtRange(e.start, e.end)}</div>
         <div class="event-body">
-          <div class="event-title">${escapeHtml(e.title)}</div>
+          <div class="event-title-row">
+            ${check}
+            <div class="event-title">${escapeHtml(e.title)}</div>
+          </div>
           ${e.location ? `<div class="event-loc">${escapeHtml(e.location)}</div>` : ''}
           ${controls}
         </div>
@@ -701,25 +740,39 @@ function bindUi() {
 }
 
 async function load() {
-  loadStoredToken();
+  const hadToken = loadStoredToken();
   const res = await fetch('data/latest.json');
   state.data = await res.json();
   bindUi();
   renderAll();
 
-  window.onGoogleLibraryLoad = () => {
+  const afterGis = async () => {
     initGis();
+    // Token expired but login was persisted → silent refresh
+    if (!hadToken && !isAuthed() && localStorage.getItem(TOKEN_KEY + '_seen')) {
+      try {
+        await requestAuth('');
+        renderAll();
+      } catch {
+        /* user must click belépés */
+      }
+    }
+    if (isAuthed() || hadToken) {
+      localStorage.setItem(TOKEN_KEY + '_seen', '1');
+    }
   };
-  // If GIS already present
-  if (window.google?.accounts?.oauth2) initGis();
+
+  window.onGoogleLibraryLoad = () => {
+    afterGis();
+  };
+  if (window.google?.accounts?.oauth2) afterGis();
   else {
-    // Poll briefly — script has async defer
     let n = 0;
     const iv = setInterval(() => {
       n += 1;
       if (window.google?.accounts?.oauth2) {
         clearInterval(iv);
-        initGis();
+        afterGis();
       } else if (n > 40) clearInterval(iv);
     }, 100);
   }

@@ -6,7 +6,8 @@ Statikus dashboard + **live szerkesztés** (Google OAuth → Tasks kipipálás, 
 
 ## Mit tudsz csinálni
 
-1. **Google belépés** (header gomb) — personal fiók: `hristos.lcdfix@gmail.com`
+1. **Google belépés** (header gomb) — personal fiók: `hristos.lcdfix@gmail.com`  
+   Token: `localStorage` (lapzárás után is megmarad; ~1 óra után silent refresh / új belépés)
 2. **Személyes taskek** — checkbox → Google Tasks `completed` **+** kapcsolódó Kairos naptáresemény törlése
 3. **Törlés (✕)** — Tasks delete (vagy complete fallback) + Kairos calendar event delete
 4. **Linkek** — Pipedrive → PD activity URL; email → Gmail; mindig van Google fallback
