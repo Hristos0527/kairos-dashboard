@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-21T17:05:00+02:00",
+  "generated_at": "2026-07-21T17:20:00+02:00",
   "schedule_date": "2026-07-21",
   "account": "hristos.lcdfix@gmail.com",
   "auth": {
@@ -40,20 +40,6 @@
         "google_url": "https://www.google.com/calendar/event?eid=cTl1bXZhdWVrNGU5MnRpYmw3OTNsMGVoZTAgaHJpc3Rvcy5sY2RmaXhAbQ",
         "url": "https://www.google.com/calendar/event?eid=cTl1bXZhdWVrNGU5MnRpYmw3OTNsMGVoZTAgaHJpc3Rvcy5sY2RmaXhAbQ",
         "source": "personal"
-      },
-      {
-        "title": "[Kairos] Gluxshop mai tasks batch",
-        "start": "2026-07-21T17:15:00+02:00",
-        "end": "2026-07-21T17:45:00+02:00",
-        "location": "Otthon / iroda",
-        "type": "kairos",
-        "event_id": "42bh1a51j8l8t3pi57ci1gqg1o",
-        "calendar_id": "73661aa7f8ac58bd811558f8cbed7d3b30dfc104a1c5d1fd3a884220d742e26d@group.calendar.google.com",
-        "task_id": "gluxshop-batch-today",
-        "editable": true,
-        "google_url": "https://www.google.com/calendar/event?eid=NDJiaDFhNTFqOGw4dDNwaTU3Y2kxZ3FnMW8gNzM2NjFhYTdmOGFjNThiZDgxMTU1OGY4Y2JlZDdkM2IzMGRmYzEwNGExYzVkMWZkM2E4ODQyMjBkNzQyZTI2ZEBn",
-        "url": "https://tasks.google.com",
-        "source": "gluxshop"
       },
       {
         "title": "[Kairos] Görög videók átnézése (Dóri)",
@@ -166,59 +152,48 @@
     ],
     "gluxshop": [
       {
-        "title": "Slack gergo",
-        "priority": "high",
-        "due": "2026-07-21",
-        "task_id": "d0F5UkVHX0c4V0ItTUJsRA",
-        "editable": false,
-        "account": "info@gluxshop.eu",
-        "google_url": "https://tasks.google.com",
-        "url": "https://tasks.google.com",
-        "source": "gluxshop"
-      },
-      {
         "title": "Garancia api",
         "priority": "high",
         "due": "2026-07-21",
+        "status": "needsAction",
         "task_id": "UjlaYURoSUVSMm5sN1FzaQ",
         "editable": false,
         "account": "info@gluxshop.eu",
-        "google_url": "https://tasks.google.com",
-        "url": "https://tasks.google.com",
-        "source": "gluxshop"
-      },
-      {
-        "title": "Lcdfix+glux Cursor",
-        "priority": "high",
-        "due": "2026-07-21",
-        "task_id": "RTlCM0pSbWpSRnhQSWQ5VA",
-        "editable": false,
-        "account": "info@gluxshop.eu",
-        "google_url": "https://tasks.google.com",
-        "url": "https://tasks.google.com",
-        "source": "gluxshop"
-      },
-      {
-        "title": "Elina rendeles+ api",
-        "priority": "high",
-        "due": "2026-07-21",
-        "task_id": "a21NdW9qd0ZFUVROUWxZVQ",
-        "editable": false,
-        "account": "info@gluxshop.eu",
-        "google_url": "https://tasks.google.com",
-        "url": "https://tasks.google.com",
+        "google_url": "https://tasks.google.com/task/UjlaYURoSUVSMm5sN1FzaQ",
+        "url": "https://tasks.google.com/task/UjlaYURoSUVSMm5sN1FzaQ",
         "source": "gluxshop"
       },
       {
         "title": "CIB szamla megszuntetes",
         "priority": "high",
         "due": "2026-07-21",
+        "status": "needsAction",
         "task_id": "UmFfVjRJMkZxYjhKUDVxbg",
         "editable": false,
         "account": "info@gluxshop.eu",
-        "google_url": "https://tasks.google.com",
-        "url": "https://tasks.google.com",
+        "google_url": "https://tasks.google.com/task/UmFfVjRJMkZxYjhKUDVxbg",
+        "url": "https://tasks.google.com/task/UmFfVjRJMkZxYjhKUDVxbg",
         "source": "gluxshop"
+      }
+    ],
+    "gluxshop_completed_today": [
+      {
+        "title": "Slack gergo",
+        "task_id": "d0F5UkVHX0c4V0ItTUJsRA",
+        "completed_at": "2026-07-21T14:00:13.545Z",
+        "account": "info@gluxshop.eu"
+      },
+      {
+        "title": "Lcdfix+glux Cursor",
+        "task_id": "RTlCM0pSbWpSRnhQSWQ5VA",
+        "completed_at": "2026-07-21T14:00:07.660Z",
+        "account": "info@gluxshop.eu"
+      },
+      {
+        "title": "Elina rendeles+ api",
+        "task_id": "a21NdW9qd0ZFUVROUWxZVQ",
+        "completed_at": "2026-07-21T14:00:01.767Z",
+        "account": "info@gluxshop.eu"
       }
     ],
     "skipped": [
@@ -247,7 +222,8 @@
     "16:00–17:00 Allee meet — előtte buffer",
     "Bellis + Macbook kivéve (Dóri / LCDFIX)",
     "Pipedrive: csak Hristos owner_id=31088152",
-    "Gluxshop kipipálás: más fiók — nyisd meg Google Tasks-ben (info@gluxshop.eu)",
+    "Gluxshop kipipálás: Google Tasks app / tasks.google.com — fiók: info@gluxshop.eu (nem Calendar)",
+    "Gluxshop batch naptáresemény törölve — soha többé batch blokk; Tasks = source of truth",
     "Holnap 5 Pipedrive blokk = határidő nélküli backlog — user megerősítés kell törléshez",
     "Grenton csütörtök 10:00 (due 07-23)",
     "Bellis + Macbook emailből jöttek, skipelve (Dóri / LCDFIX)",
@@ -256,7 +232,7 @@
   ],
   "stats": {
     "open_personal": 9,
-    "open_gluxshop": 5,
+    "open_gluxshop": 2,
     "scheduled_today": 4,
     "scheduled_tomorrow": 5,
     "scheduled_thursday": 1,
@@ -342,11 +318,19 @@
       "tasks_kept_in_google_tasks": true,
       "timed_blocks_already_present": [
         "[Kairos] Görög marketinges levél átnézése 15:35",
-        "[Kairos] Gluxshop mai tasks batch 17:15",
         "[Kairos] Görög videók átnézése (Dóri) 17:50",
         "[Kairos] Grenton hívni 2026-07-23 10:00"
       ],
       "gluxshop_calendar_not_deleted": true
+    },
+    "gluxshop_batch_removed": {
+      "at": "2026-07-21T17:20:00+02:00",
+      "event_id": "42bh1a51j8l8t3pi57ci1gqg1o",
+      "summary": "[Kairos] Gluxshop mai tasks batch",
+      "reason": "Calendar ≠ Tasks checkbox; user cannot complete fake batch event",
+      "rule": "forbid_batch_events; gluxshop_default=tasks_only; timed block requires real task_id",
+      "gluxshop_open_remaining": ["Garancia api", "CIB szamla megszuntetes"],
+      "gluxshop_completed_earlier_today": ["Slack gergo", "Lcdfix+glux Cursor", "Elina rendeles+ api"]
     }
   }
 }
