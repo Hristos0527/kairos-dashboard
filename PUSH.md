@@ -1,13 +1,20 @@
-# Push checklist (user)
+# Push checklist
 
-1. Unblock github.com (Little Snitch / firewall) — currently Connection refused on :443
-2. Re-auth: `gh auth login -h github.com -p https -w`
-3. Create + push:
+Lokális commit kész: interaktív OAuth kipipálás + naptár mozgatás.
+
+Ha `github.com:443` Connection refused (Little Snitch / firewall):
+
+1. Engedélyezd a kimenő 443-at github.com / api.github.com felé
+2. `gh auth login -h github.com -p https -w` (ha token invalid)
+3. Push:
 
 ```bash
 cd /Users/hristos/Projects/kairos-dashboard
-gh repo create kairos-dashboard --public --source=. --remote=origin --push
-gh api -X POST repos/Hristos0527/kairos-dashboard/pages -f build_type=legacy -F source[branch]=main -F source[path]=/
+TOKEN=$(gh auth token)
+git -c credential.helper= \
+  -c http.extraHeader="Authorization: Bearer $TOKEN" \
+  push -u origin main
 ```
 
-Expected URL: https://hristos0527.github.io/kairos-dashboard/
+Pages: Settings → Pages → Deploy from branch → `main` / `/ (root)`  
+URL: https://hristos0527.github.io/kairos-dashboard/

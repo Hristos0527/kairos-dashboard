@@ -287,8 +287,9 @@ function renderTasks(el, items, bucket) {
       const google = t.google_url
         ? `<a class="mini-link" href="${escapeHtml(t.google_url)}" target="_blank" rel="noopener">Google</a>`
         : '';
+      const canCheck = editable && isAuthed() && !done;
       const checkbox = editable
-        ? `<input type="checkbox" class="task-check" data-bucket="${bucket}" data-id="${escapeHtml(t.task_id)}" ${done ? 'checked' : ''} ${isAuthed() && !done ? '' : done ? 'disabled' : isAuthed() ? '' : 'disabled'} />`
+        ? `<input type="checkbox" class="task-check" data-bucket="${bucket}" data-id="${escapeHtml(t.task_id)}" ${done ? 'checked' : ''} ${canCheck ? '' : 'disabled'} />`
         : `<span class="task-lock" title="Más fiók — csak Google link">↗</span>`;
       return `
       <li class="${done ? 'done' : ''}" data-task-id="${escapeHtml(t.task_id || '')}">
