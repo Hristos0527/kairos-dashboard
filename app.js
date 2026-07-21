@@ -258,12 +258,51 @@ function allCalendarDays() {
 }
 
 function findLinkedEventForTask(task) {
-  if (!task?.task_id) return null;
+  if (!task) return null;
+  // Prefer explicit event_id on the task (latest.json)
+  if (task.event_id) {
+    for (const { list } of allCalendarDays()) {
+      const hit = list.find((e) => e.event_id === task.event_id);
+      if (hit) return hit;
+    }
+    return {
+      event_id: task.event_id,
+      calendar_id: task.calendar_id || cfg().kairosCalendarId,
+    };
+  }
+  if (!task.task_id) return null;
   for (const { list } of allCalendarDays()) {
     const hit = list.find((e) => e.task_id === task.task_id && e.event_id);
     if (hit) return hit;
   }
   return null;
+}
+
+/** Source deep-links: Pipedrive → PD URL; email → Gmail. Google as always-on fallback. */
+function sourceLinksHtml(item) {
+  const links = [];
+  const src = item?.source || '';
+  const gmail = item.gmail_url || (src === 'email' && item.url?.includes('mail.google.com') ? item.url : '');
+  if (gmail) {
+    links.push(
+      `<a class="mini-link" href="${escapeHtml(gmail)}" target="_blank" rel="noopener">Gmail</a>`,
+    );
+  }
+  if (item.pipedrive_url) {
+    links.push(
+      `<a class="mini-link" href="${escapeHtml(item.pipedrive_url)}" target="_blank" rel="noopener">Pipedrive</a>`,
+    );
+  } else if (src === 'pipedrive' && item.url?.includes('pipedrive.com')) {
+    links.push(
+      `<a class="mini-link" href="${escapeHtml(item.url)}" target="_blank" rel="noopener">Pipedrive</a>`,
+    );
+  }
+  if (item.google_url) {
+    links.push(
+      `<a class="mini-link" href="${escapeHtml(item.google_url)}" target="_blank" rel="noopener">Google</a>`,
+    );
+  }
+  return links.join(' ');
 }
 
 function removeEventFromState(eventId) {
@@ -304,18 +343,16 @@ function renderTimeline(el, events, dayKey) {
   el.innerHTML = events
     .map((e) => {
       const editable = e.editable !== false && e.event_id;
-      const google = e.google_url
-        ? `<a class="mini-link" href="${escapeHtml(e.google_url)}" target="_blank" rel="noopener">Google</a>`
-        : '';
+      const links = sourceLinksHtml(e);
       const controls = editable
         ? `<div class="event-controls">
             <button type="button" class="chip" data-action="shift" data-day="${dayKey}" data-id="${escapeHtml(e.event_id)}" data-delta="-15" ${isAuthed() ? '' : 'disabled'} title="15 perccel korábbra">−15p</button>
             <button type="button" class="chip" data-action="shift" data-day="${dayKey}" data-id="${escapeHtml(e.event_id)}" data-delta="15" ${isAuthed() ? '' : 'disabled'} title="15 perccel későbbre">+15p</button>
             <input type="datetime-local" class="time-input" data-day="${dayKey}" data-id="${escapeHtml(e.event_id)}" value="${toLocalInputValue(e.start)}" ${isAuthed() ? '' : 'disabled'} />
             <button type="button" class="chip" data-action="set-time" data-day="${dayKey}" data-id="${escapeHtml(e.event_id)}" ${isAuthed() ? '' : 'disabled'}>Áthelyez</button>
-            ${google}
+            ${links}
           </div>`
-        : `<div class="event-controls">${google}</div>`;
+        : `<div class="event-controls">${links}</div>`;
       return `
       <div class="event ${escapeHtml(e.type || '')}" data-event-id="${escapeHtml(e.event_id || '')}">
         <div class="event-time">${fmtRange(e.start, e.end)}</div>
@@ -353,9 +390,7 @@ function renderAllDay(el, events) {
   }
   el.innerHTML = events
     .map((e) => {
-      const google = e.google_url
-        ? `<a class="mini-link" href="${escapeHtml(e.google_url)}" target="_blank" rel="noopener">Google</a>`
-        : '';
+      const links = sourceLinksHtml(e);
       const source = e.source
         ? `<span class="source-tag">${escapeHtml(e.source)}</span>`
         : '';
@@ -366,7 +401,7 @@ function renderAllDay(el, events) {
         <div class="event-body">
           <div class="event-title">${escapeHtml(e.title)} ${source} ${kind}</div>
           ${e.location ? `<div class="event-loc">${escapeHtml(e.location)}</div>` : ''}
-          <div class="event-controls">${google}</div>
+          <div class="event-controls">${links}</div>
         </div>
       </div>`;
     })
@@ -382,18 +417,13 @@ function renderTasks(el, items, bucket) {
     .map((t) => {
       const editable = t.editable !== false && t.task_id;
       const done = t._completed;
-      const google = t.google_url
-        ? `<a class="mini-link" href="${escapeHtml(t.google_url)}" target="_blank" rel="noopener">Google</a>`
-        : '';
+      const links = sourceLinksHtml(t);
       const canCheck = editable && isAuthed() && !done;
       const checkbox = editable
         ? `<input type="checkbox" class="task-check" data-bucket="${bucket}" data-id="${escapeHtml(t.task_id)}" ${done ? 'checked' : ''} ${canCheck ? '' : 'disabled'} />`
         : `<span class="task-lock" title="Más fiók — csak Google link">↗</span>`;
       const delBtn = editable
-        ? `<button type="button" class="chip danger" data-action="delete-task" data-bucket="${bucket}" data-id="${escapeHtml(t.task_id)}" ${isAuthed() && !done ? '' : 'disabled'} title="Törlés">✕</button>`
-        : '';
-      const pd = t.pipedrive_url
-        ? `<a class="mini-link" href="${escapeHtml(t.pipedrive_url)}" target="_blank" rel="noopener">Pipedrive</a>`
+        ? `<button type="button" class="chip danger" data-action="delete-task" data-bucket="${bucket}" data-id="${escapeHtml(t.task_id)}" ${isAuthed() && !done ? '' : 'disabled'} title="Törlés (Tasks + Kairos naptár)">✕</button>`
         : '';
       return `
       <li class="${done ? 'done' : ''}${t._deleted ? ' deleted' : ''}" data-task-id="${escapeHtml(t.task_id || '')}">
@@ -402,8 +432,7 @@ function renderTasks(el, items, bucket) {
           <span class="task-title">${escapeHtml(t.title)}</span>
         </label>
         <span class="task-meta">
-          ${pd}
-          ${google}
+          ${links}
           ${delBtn}
           <span class="badge ${escapeHtml(t.priority || 'low')}">${escapeHtml(t.priority || '')}</span>
         </span>
@@ -426,6 +455,48 @@ function renderList(el, items, empty = '—') {
     .join('');
 }
 
+function renderEmailStatus(el) {
+  const section = document.getElementById('section-email');
+  if (!el) return;
+  const audit = state.data?.email_audit;
+  if (!audit) {
+    if (section) section.hidden = true;
+    el.innerHTML = '';
+    return;
+  }
+  if (section) section.hidden = false;
+  const open = audit.became_open_tasks || [];
+  const skipped = audit.extracted_then_excluded || [];
+  const noise = audit.processed_no_task || [];
+  const rows = [];
+  for (const t of open) {
+    const href = t.gmail_id
+      ? `https://mail.google.com/mail/u/0/#all/${t.gmail_id}`
+      : null;
+    const link = href
+      ? `<a class="mini-link" href="${escapeHtml(href)}" target="_blank" rel="noopener">Gmail</a>`
+      : '';
+    rows.push(
+      `<li><span class="email-ok">→ task</span> ${escapeHtml(t.title)} ${link}${t.note ? ` <span class="event-loc">(${escapeHtml(t.note)})</span>` : ''}</li>`,
+    );
+  }
+  for (const t of skipped) {
+    const href = t.gmail_id
+      ? `https://mail.google.com/mail/u/0/#all/${t.gmail_id}`
+      : null;
+    const link = href
+      ? `<a class="mini-link" href="${escapeHtml(href)}" target="_blank" rel="noopener">Gmail</a>`
+      : '';
+    rows.push(
+      `<li><span class="email-skip">skip</span> ${escapeHtml(t.title)} — ${escapeHtml(t.reason || '')} ${link}</li>`,
+    );
+  }
+  if (noise.length) {
+    rows.push(`<li class="event-loc">Egyéb feldolgozott (nincs task): ${escapeHtml(noise.join(', '))}</li>`);
+  }
+  el.innerHTML = rows.length ? rows.join('') : '<li>Nincs email audit adat.</li>';
+}
+
 function renderAll() {
   const data = state.data;
   if (!data) return;
@@ -445,6 +516,7 @@ function renderAll() {
   renderList(document.getElementById('warnings'), data.warnings, 'Minden rendben.');
   renderTasks(document.getElementById('tasks-personal'), data.tasks?.personal, 'personal');
   renderTasks(document.getElementById('tasks-gluxshop'), data.tasks?.gluxshop, 'gluxshop');
+  renderEmailStatus(document.getElementById('email-status'));
   updateAuthUi();
 }
 

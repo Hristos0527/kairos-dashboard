@@ -270,6 +270,23 @@ h2 .hint {
 
 .warnings li { color: var(--medium); }
 
+.email-ok {
+  display: inline-block;
+  min-width: 3.5rem;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--ok);
+}
+.email-skip {
+  display: inline-block;
+  min-width: 3.5rem;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
 .footer {
   text-align: center;
   padding: 1rem 2rem 2rem;

@@ -7,9 +7,12 @@ Statikus dashboard + **live szerkesztés** (Google OAuth → Tasks kipipálás, 
 ## Mit tudsz csinálni
 
 1. **Google belépés** (header gomb) — personal fiók: `hristos.lcdfix@gmail.com`
-2. **Személyes taskek** — checkbox → Google Tasks `completed`
-3. **Naptár** — eseményenként **−15p / +15p**, vagy időválasztó + **Áthelyez** → Calendar `events.patch`
-4. **Gluxshop taskek** — más fiók (`info@gluxshop.eu`) → csak **Google** link (v1)
+2. **Személyes taskek** — checkbox → Google Tasks `completed` **+** kapcsolódó Kairos naptáresemény törlése
+3. **Törlés (✕)** — Tasks delete (vagy complete fallback) + Kairos calendar event delete
+4. **Linkek** — Pipedrive → PD activity URL; email → Gmail; mindig van Google fallback
+5. **Naptár** — eseményenként **−15p / +15p**, vagy időválasztó + **Áthelyez** → Calendar `events.patch`
+6. **Gluxshop taskek** — más fiók (`info@gluxshop.eu`) → csak **Google** link (v1)
+7. **Email státusz** — rövid audit a `latest.json` → `email_audit` mezőből
 
 ## Egyszeri OAuth setup (kötelező az első belépéshez)
 
